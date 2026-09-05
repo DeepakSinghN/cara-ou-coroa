@@ -1,0 +1,70 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout
+  title="Página Não Encontrada (404) — Cara ou Coroa Virtual"
+  description="Ops! A página que você procurava não foi encontrada. Volte para o simulador de cara ou coroa online gratuito e faça seu sorteio."
+  canonicalUrl="https://caraoucoroavirtual.com/404"
+>
+  <Nav />
+
+  <main class="bg-canvas dark:bg-surface-black min-h-[100svh] pt-16 flex flex-col justify-between">
+    <!-- Hero / Error 404 Section -->
+    <section class="tile-dark tile-padding py-20 my-auto">
+      <div class="container-content max-w-[680px] mx-auto text-center space-y-6">
+
+        <!-- 404 Coin Badge -->
+        <div class="inline-flex items-center justify-center w-24 h-24 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 font-extrabold text-4xl shadow-inner mx-auto mb-2">
+          🪙 404
+        </div>
+
+        <p class="text-xs font-semibold tracking-widest text-primary-dark uppercase">Erro 404 — Página Não Encontrada</p>
+        
+        <h1 class="text-display-lg text-on-dark mb-4 mt-0">
+          Ops! Esta página caiu fora da mesa.
+        </h1>
+        
+        <p class="text-lead text-body-muted max-w-[540px] mx-auto leading-relaxed">
+          O link que você tentou acessar não existe, foi movido ou digitado incorretamente. Que tal girar a moeda e tentar novamente?
+        </p>
+
+        <!-- CTA Buttons -->
+        <div class="pt-4 flex flex-wrap justify-center gap-4">
+          <a
+            href="/"
+            class="bg-primary text-white no-underline rounded-full font-bold hover:bg-primary-focus transition-all px-8 py-3.5 text-base shadow-md hover:shadow-lg inline-flex items-center gap-2"
+          >
+            <span>🪙</span>
+            <span>Voltar ao Início & Jogar!</span>
+          </a>
+          <a
+            href="/contato"
+            class="bg-surface-white/10 text-on-dark border border-white/20 no-underline rounded-full font-semibold hover:bg-surface-white/20 transition-all px-6 py-3.5 text-base inline-flex items-center gap-2"
+          >
+            <span>Contato</span>
+          </a>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="border-t border-white/10 pt-8 mt-8">
+          <p class="text-xs font-medium text-body-muted uppercase tracking-wider mb-4">Páginas Populares</p>
+          <div class="flex flex-wrap justify-center gap-4 text-sm">
+            <a href="/" class="text-primary-dark hover:underline">Simulador de Moeda</a>
+            <span class="text-white/20">•</span>
+            <a href="/#perguntas-frequentes" class="text-primary-dark hover:underline">FAQ & Dúvidas</a>
+            <span class="text-white/20">•</span>
+            <a href="/sobre-nos" class="text-primary-dark hover:underline">Sobre Nós</a>
+            <span class="text-white/20">•</span>
+            <a href="/politica-de-privacidade" class="text-primary-dark hover:underline">Privacidade</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>

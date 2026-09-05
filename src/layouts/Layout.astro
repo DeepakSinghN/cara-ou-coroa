@@ -1,23 +1,186 @@
-<!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
-</html>
+---
+import '../styles/global.css';
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>
+interface Props {
+  title?: string;
+  description?: string;
+  canonicalUrl?: string;
+}
+
+const {
+  title = "Cara ou Coroa Online — Jogar Grátis | Moeda Virtual | Cara ou Corôa",
+  description = "Cara ou coroa online grátis. Jogue cara ou corôa virtual com animação 3D real, estatísticas ao vivo, modo multi-moeda e modos de jogo. Sem cadastro. Sem anúncios.",
+  canonicalUrl = "https://caraoucoroavirtual.com",
+} = Astro.props;
+---
+<!doctype html>
+<html lang="pt-BR" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Favicon & App Icons -->
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Cara ou Coroa Virtual" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- SEO Principal -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+    <meta name="robots" content="index, follow" />
+    <meta name="keywords" content="cara ou coroa, cara ou coroa online, cara ou coroa no google, cara ou corôa jogo, google cara ou coroa, cara ou corôa jogar, cara ou corôa virtual, cara ou corôa moeda, jogar cara ou coroa, moeda virtual" />
+    <meta name="language" content="Portuguese" />
+    <meta name="geo.region" content="BR" />
+    <meta name="geo.placename" content="Brasil" />
+
+    <!-- hreflang — Targeting Brazil, Portugal, and all Portuguese speakers -->
+    <link rel="alternate" hreflang="pt-BR" href="https://caraoucoroavirtual.com" />
+    <link rel="alternate" hreflang="pt-PT" href="https://caraoucoroavirtual.com" />
+    <link rel="alternate" hreflang="pt" href="https://caraoucoroavirtual.com" />
+    <link rel="alternate" hreflang="x-default" href="https://caraoucoroavirtual.com" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:site_name" content="Cara ou Coroa Virtual" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:locale:alternate" content="pt_PT" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:site" content="@caraoucoroa" />
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Cara ou Coroa Virtual",
+        "alternateName": ["Cara ou Coroa Online", "Cara ou Corôa Jogo", "Moeda Virtual"],
+        "url": "https://caraoucoroavirtual.com",
+        "description": "Jogue cara ou coroa online grátis. Moeda virtual com animação 3D real, estatísticas ao vivo, modo multi-moeda e modos de jogo. Sem cadastro. Sem anúncios.",
+        "applicationCategory": "GameApplication",
+        "operatingSystem": "Any",
+        "inLanguage": "pt-BR",
+        "availableLanguage": ["pt-BR", "pt-PT"],
+        "isAccessibleForFree": true,
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "BRL"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Cara ou Coroa Virtual",
+          "url": "https://caraoucoroavirtual.com"
+        }
+      }
+    </script>
+
+    <!-- JSON-LD: FAQ Schema — 9 questions for Google rich results -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Cara ou coroa?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "<p>Cara ou coroa é um jogo de sorte baseado no lançamento de uma moeda. Cada face da moeda representa um resultado: <strong>cara</strong> (a face com o rosto ou símbolo principal) e <strong>coroa</strong> (a face reversa). O resultado é completamente aleatório, com 50% de probabilidade para cada lado. É usado há séculos para tomar decisões rápidas e imparciais.</p>"
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Qual é cara ou coroa?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "<p><strong>Cara</strong> é a face principal da moeda — normalmente a que exibe um rosto, símbolo ou efígie. <strong>Coroa</strong> é o verso da moeda — o lado oposto ao da cara. Em inglês, equivalem a <em>heads</em> (cara) e <em>tails</em> (coroa). No nosso simulador virtual, a moeda dourada exibe <strong>C</strong> para cara e a face prateada exibe <strong>K</strong> para coroa.</p>"
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Quantas vezes posso lançar a moeda virtual?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "<p>Você pode lançar a moeda virtual <strong>quantas vezes quiser</strong>, sem qualquer limite. Não há restrições de uso, sem cotas diárias, sem planos pagos. O simulador de cara ou coroa é completamente gratuito e ilimitado — basta clicar no botão \"Jogar a moeda!\" ou pressionar a tecla Espaço.</p>"
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Esta aplicação é gratuita?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "<p>Sim, <strong>100% gratuita para sempre</strong>. O Cara ou Coroa Virtual não tem planos pagos, anúncios, assinaturas ou qualquer custo oculto. Todos os recursos — modo multi-moeda, estatísticas ao vivo, modo Melhor de 3/5/7, rótulos personalizados e modo escuro — estão disponíveis para todos sem nenhuma limitação.</p>"
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Preciso ter uma conta para lançar a moeda online?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "<p>Não. O Cara ou Coroa Virtual <strong>não exige cadastro, login ou conta de qualquer tipo</strong>. Basta acessar o site e começar a jogar imediatamente. Nenhum dado pessoal é solicitado ou armazenado. Todos os resultados ficam apenas na memória do seu navegador durante a sessão e desaparecem quando você fecha a aba.</p>"
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Quantas faces tem a moeda virtual?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "<p>A moeda virtual tem <strong>duas faces</strong>: <strong>Cara</strong> (face dourada, lado principal) e <strong>Coroa</strong> (face prateada, lado reverso). Você também pode personalizar os nomes de cada face — substitua \"Cara\" e \"Coroa\" por qualquer texto de até 12 caracteres, como \"Sim/Não\", \"Pizza/Sushi\" ou \"Casa/Fora\".</p>"
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "O que é mais provável sair, cara ou coroa?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "<p>No nosso simulador, <strong>nenhum lado é mais provável que o outro</strong>. Cada lançamento tem exatamente <strong>50% de probabilidade</strong> para cara e 50% para coroa, usando o gerador Math.random() do navegador — estatisticamente independente e sem viés. Curiosidade: moedas físicas têm leve tendência ao lado que estava para cima (~51%), mas nossa moeda virtual é perfeitamente justa.</p>"
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Qual é a diferença em relação à Cara ou Coroa do Google?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "<p>O <strong>Cara ou Coroa do Google</strong> é uma funcionalidade básica integrada à busca — simples e funcional, mas sem recursos extras. O <strong>Cara ou Coroa Virtual</strong> vai muito além: oferece animação 3D realista com som, estatísticas ao vivo (contagens, percentuais, sequências), modo multi-moeda (até 5 moedas simultâneas), modo torneio Melhor de 3/5/7, rótulos personalizados, modo escuro e atalhos de teclado — tudo gratuito, sem anúncios e sem cadastro.</p>"
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Quais são os usos para o simulador de cara ou coroa?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "<p>O simulador de cara ou coroa tem inúmeros usos: <strong>decisões do dia a dia</strong> (o que comer, assistir ou fazer); <strong>esportes e torneios</strong> (sorteio de campo, escolha de lado); <strong>jogos de mesa</strong> (quem começa, resolução de empates); <strong>votações em grupo</strong> (use o modo multi-moeda para maioria); <strong>educação</strong> (ensinar probabilidade e estatística em sala de aula); <strong>sorteios</strong> (escolha aleatória imparcial); e qualquer situação que precise de um árbitro justo e instantâneo.</p>"
+            }
+          }
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <!-- Tema claro por padrão — sem FOUC -->
+    <script is:inline>
+      document.documentElement.setAttribute('data-theme', 'light');
+    </script>
+    <slot />
+  </body>
+</html>

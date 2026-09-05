@@ -1,0 +1,789 @@
+---
+// CoinApp — Aplicativo interativo cara ou coroa
+// Sem persistência de dados — todo estado é apenas de sessão (em memória)
+---
+
+<section id="cara-ou-coroa" class="bg-canvas text-ink dark:bg-surface-black dark:text-on-dark min-h-[100svh] flex items-center transition-colors duration-300" aria-label="Cara ou coroa virtual — jogo online">
+  <div class="container-content w-full py-10">
+
+    <!-- Título -->
+    <div class="text-center mb-3">
+      <h1 id="app-eyebrow" class="text-xl font-semibold tracking-[0.231px] text-primary dark:text-primary-dark mb-2 uppercase">Cara ou Coroa Virtual</h1>
+      <p class="text-lead text-ink-faint dark:text-body-muted m-0">Grátis, instantâneo e justo. Clique ou toque na moeda para lançar.</p>
+    </div>
+
+    <!-- Main layout: coin centered, stats shifted right on desktop -->
+    <div id="app-layout" class="relative flex flex-col lg:flex-row items-center lg:items-start justify-center mt-10 w-full min-h-[460px]">
+
+      <!-- CENTER: Coin + Controls (Dead-centered in desktop layout) -->
+      <div class="flex flex-col items-center gap-6 w-full max-w-[540px] mx-auto flex-none">
+
+        <!-- Linha de seletores (quantidade de moedas e modo de jogo) -->
+        <div class="flex items-center gap-2 lg:gap-4 flex-wrap justify-center">
+          <!-- Dropdown de quantidade de moedas -->
+          <div class="flex items-center gap-1">
+            <label for="coin-count-select" class="text-sm text-ink-muted dark:text-body-muted font-normal">Moedas:</label>
+            <select id="coin-count-select" class="bg-parchment text-ink border border-hairline dark:bg-white/8 dark:text-on-dark dark:border-white/15 rounded-sm px-3 py-1.5 text-sm cursor-pointer outline-none">
+              <option value="1">1 Moeda</option>
+              <option value="2">2 Moedas</option>
+              <option value="3">3 Moedas</option>
+              <option value="4">4 Moedas</option>
+              <option value="5">5 Moedas</option>
+              <option value="10">10 Moedas</option>
+            </select>
+          </div>
+
+          <!-- Seletor de modo de jogo -->
+          <div class="flex items-center gap-1">
+            <label for="bestof-select" class="text-sm text-ink-muted dark:text-body-muted font-normal">Modo de jogo:</label>
+            <select id="bestof-select" class="bg-parchment text-ink border border-hairline dark:bg-white/8 dark:text-on-dark dark:border-white/15 rounded-sm px-3 py-1.5 text-sm cursor-pointer outline-none">
+              <option value="0">Lance livre</option>
+              <option value="3">Melhor de 3</option>
+              <option value="5">Melhor de 5</option>
+              <option value="7">Melhor de 7</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Área de exibição das moedas -->
+        <div id="coins-container" class="flex flex-wrap gap-4 justify-center items-center min-h-[200px]">
+          <!-- Moeda única por padrão -->
+          <div class="coin-wrapper" id="coin-0">
+            <div class="coin" id="single-coin" role="button" tabindex="0" aria-label="Moeda — clique ou pressione Espaço para lançar" title="Clique para lançar!">
+              <div class="coin-edge-ring"></div>
+              <div class="coin-face coin-face-front" id="coin-0-front" aria-hidden="true">
+                <div class="text-center leading-tight">
+                  <div id="heads-label-display" class="text-xl font-bold">C</div>
+                  <div class="text-[11px] font-normal opacity-70 mt-0.5" id="heads-sublabel">CARA</div>
+                </div>
+              </div>
+              <div class="coin-face coin-face-back" id="coin-0-back" aria-hidden="true">
+                <div class="text-center leading-tight">
+                  <div id="tails-label-display" class="text-xl font-bold">K</div>
+                  <div class="text-[11px] font-normal opacity-70 mt-0.5" id="tails-sublabel">COROA</div>
+                </div>
+              </div>
+            </div>
+            <div class="coin-shadow" id="coin-0-shadow"></div>
+          </div>
+        </div>
+
+        <!-- Placar Melhor de X (exibido abaixo da moeda quando o modo de jogo está ativo) -->
+        <div id="bestof-score-container" class="hidden bg-parchment/90 dark:bg-white/8 border border-hairline dark:border-white/15 rounded-full px-5 py-2 my-1 text-center transition-all duration-300 shadow-sm">
+          <div class="flex items-center gap-3">
+            <span class="text-[11px] font-bold text-primary dark:text-primary-dark uppercase tracking-wider" id="bestof-label">Melhor de 3</span>
+            <span class="text-ink-faint/30 dark:text-white/20">|</span>
+            <div class="flex items-center gap-1.5">
+              <span class="text-xs font-semibold text-ink-muted dark:text-body-muted" id="bestof-heads-name">Cara</span>
+              <span id="bestof-heads-wins" class="text-base font-bold text-[#b8860b] dark:text-[#d4a017]">0</span>
+            </div>
+            <span class="text-xs text-ink-faint dark:text-white/40 font-bold">:</span>
+            <div class="flex items-center gap-1.5">
+              <span id="bestof-tails-wins" class="text-base font-bold text-[#707070] dark:text-[#9a9a9a]">0</span>
+              <span class="text-xs font-semibold text-ink-muted dark:text-body-muted" id="bestof-tails-name">Coroa</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Anúncio do resultado -->
+        <div id="result-announcement" aria-live="polite" aria-atomic="true" class="min-h-[40px] text-center">
+          <p id="result-text" class="text-xl font-semibold text-ink dark:text-on-dark m-0 opacity-0 transition-opacity duration-300 tracking-[0.231px]"></p>
+          <p id="result-sub" class="text-sm text-ink-faint dark:text-body-muted mb-0 opacity-0 transition-opacity duration-300"></p>
+        </div>
+
+        <!-- Botão principal de lançamento + controles -->
+        <div class="flex items-center gap-3 flex-wrap justify-center">
+          <button id="flip-btn" class="btn-primary px-9 py-3.5 text-lg font-light" aria-label="Lançar moeda">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" class="shrink-0">
+              <path d="M1 4v6h6M23 20v-6h-6"/>
+              <path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4-4.64 4.36A9 9 0 0 1 3.51 15"/>
+            </svg>
+            Jogar a moeda!
+          </button>
+
+          <button id="reset-btn" class="btn-ghost px-5 py-3.5 text-sm border-hairline text-ink-muted hover:border-ink hover:text-ink dark:border-white/25 dark:text-white/70 dark:hover:border-white/50 dark:hover:text-white" aria-label="Reiniciar estatísticas">
+            Reiniciar
+          </button>
+
+          <button id="sound-btn" class="btn-icon bg-black/5 text-ink-muted hover:bg-black/10 hover:text-ink dark:bg-white/10 dark:text-white/70 dark:hover:bg-white/20 dark:hover:text-white" aria-label="Alternar som" title="Alternar som">
+            <svg id="sound-on-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+              <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>
+            </svg>
+            <svg id="sound-off-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" class="hidden">
+              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+              <line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/>
+            </svg>
+          </button>
+
+          <!-- Personalizar rótulos -->
+          <button id="customize-btn" class="btn-icon bg-black/5 text-ink-muted hover:bg-black/10 hover:text-ink dark:bg-white/10 dark:text-white/70 dark:hover:bg-white/20 dark:hover:text-white" aria-label="Personalizar rótulos da moeda" title="Personalizar rótulos">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+              <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Dica de atalho do teclado -->
+        <p class="text-xs text-ink-faint dark:text-white/30 m-0 text-center">
+          Pressione <kbd class="bg-black/5 dark:bg-white/10 px-1.5 py-0.5 rounded font-mono">Espaço</kbd> para lançar &nbsp;·&nbsp;
+          <kbd class="bg-black/5 dark:bg-white/10 px-1.5 py-0.5 rounded font-mono">R</kbd> para reiniciar
+        </p>
+      </div>
+
+      <!-- RIGHT: Stats Panel (Positioned on the right side on desktop, stacked below on mobile) -->
+      <div id="stats-panel" class="flex-none w-full sm:w-[280px] max-w-full sm:max-w-[320px] lg:w-[270px] lg:absolute lg:right-0 lg:top-0 mt-10 lg:mt-0">
+        <!-- Painel de estatísticas -->
+        <div class="bg-parchment border border-hairline dark:bg-white/6 dark:border-white/10 rounded-lg p-6">
+          <h2 class="text-xs font-semibold text-ink-faint dark:text-white/50 mb-5 uppercase tracking-[0.5px]">Estatísticas</h2>
+
+          <!-- Total de lançamentos -->
+          <div class="flex justify-between mb-4">
+            <span class="text-sm text-ink-muted dark:text-body-muted">Total de lançamentos</span>
+            <span id="stat-total" class="text-[17px] font-semibold text-ink dark:text-on-dark">0</span>
+          </div>
+
+          <!-- Cara -->
+          <div class="mb-3">
+            <div class="flex justify-between mb-1.5">
+              <span class="text-sm text-[#b8860b] dark:text-[#d4a017] font-semibold">Cara</span>
+              <span class="text-sm text-ink dark:text-on-dark">
+                <span id="stat-heads">0</span>
+                <span class="text-ink-faint dark:text-body-muted ml-1">(<span id="stat-heads-pct">0</span>%)</span>
+              </span>
+            </div>
+            <div class="bg-black/10 dark:bg-white/10 rounded-full overflow-hidden h-1.5">
+              <div id="bar-heads" class="stat-bar bg-[#d4a017] w-0"></div>
+            </div>
+          </div>
+
+          <!-- Coroa -->
+          <div class="mb-5">
+            <div class="flex justify-between mb-1.5">
+              <span class="text-sm text-[#707070] dark:text-[#9a9a9a] font-semibold">Coroa</span>
+              <span class="text-sm text-ink dark:text-on-dark">
+                <span id="stat-tails">0</span>
+                <span class="text-ink-faint dark:text-body-muted ml-1">(<span id="stat-tails-pct">0</span>%)</span>
+              </span>
+            </div>
+            <div class="bg-black/10 dark:bg-white/10 rounded-full overflow-hidden h-1.5">
+              <div id="bar-tails" class="stat-bar bg-[#9a9a9a] w-0"></div>
+            </div>
+          </div>
+
+          <!-- Sequência -->
+          <div class="border-t border-hairline dark:border-white/10 pt-4">
+            <div class="flex justify-between items-center">
+              <span class="text-sm text-ink-muted dark:text-body-muted">Sequência atual</span>
+              <span id="stat-streak" class="text-sm font-semibold text-ink dark:text-on-dark">—</span>
+            </div>
+            <div class="flex justify-between items-center mt-2">
+              <span class="text-sm text-ink-muted dark:text-body-muted">Maior sequência</span>
+              <span id="stat-longest" class="text-sm font-semibold text-ink dark:text-on-dark">—</span>
+            </div>
+          </div>
+
+          <!-- Histórico de lançamentos -->
+          <div class="border-t border-hairline dark:border-white/10 pt-4">
+            <p class="text-xs text-ink-faint dark:text-white/50 mb-2.5 uppercase tracking-[0.5px]">Lançamentos recentes</p>
+            <div id="history-stream" class="flex flex-wrap gap-1 min-h-[28px]" aria-live="polite" aria-label="Histórico de lançamentos"></div>
+            <p id="history-empty" class="text-xs text-ink-faint dark:text-white/30 m-0 italic">Nenhum lançamento ainda — jogue a moeda!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Modal de Personalização de Rótulos -->
+<div id="customize-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="customize-modal-title">
+  <div class="modal-card">
+    <h3 id="customize-modal-title" class="text-xl font-semibold mb-2 mt-0 text-ink">Personalizar sua Moeda</h3>
+    <p class="text-sm text-ink-faint mb-6 mt-0">Substitua Cara/Coroa pelos seus próprios rótulos de decisão.</p>
+    <div class="flex flex-col gap-3 mb-6">
+      <div>
+        <label for="custom-heads" class="block text-sm font-semibold mb-1 text-ink">Lado Cara</label>
+        <input id="custom-heads" type="text" placeholder="ex. Pizza" maxlength="12" class="w-full px-3.5 py-2.5 border border-hairline rounded-sm text-base bg-parchment text-ink outline-none box-border" />
+      </div>
+      <div>
+        <label for="custom-tails" class="block text-sm font-semibold mb-1 text-ink">Lado Coroa</label>
+        <input id="custom-tails" type="text" placeholder="ex. Sushi" maxlength="12" class="w-full px-3.5 py-2.5 border border-hairline rounded-sm text-base bg-parchment text-ink outline-none box-border" />
+      </div>
+    </div>
+    <div class="flex gap-2.5 justify-end">
+      <button id="customize-cancel" class="btn-ghost text-sm px-4.5 py-2.5">Cancelar</button>
+      <button id="customize-save" class="btn-primary text-sm px-4.5 py-2.5">Aplicar</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ============================================================
+// COIN FLIP APP — Session-only state (no localStorage)
+// ============================================================
+
+// ---------- State ----------
+const state = {
+  headsLabel: 'Cara',
+  tailsLabel: 'Coroa',
+  coinCount: 1,
+  isFlipping: false,
+  soundEnabled: true,
+  bestofN: 0,        // 0 = free flip, 3/5/7 = best-of
+  // Session stats (reset on page refresh — no persistence by design)
+  totalFlips: 0,
+  headsCount: 0,
+  tailsCount: 0,
+  currentStreak: { side: '', count: 0 },
+  longestStreak: { side: '', count: 0 },
+  history: [] as string[], // 'H' or 'T'
+  bestofHeadsWins: 0,
+  bestofTailsWins: 0,
+  bestofActive: false,
+};
+
+// ---------- Audio — real coin-toss MP3 ----------
+// Preload on first user interaction; rewind and replay on every flip.
+const coinAudio = new Audio('/coin-toss-sound.mp3');
+coinAudio.preload = 'auto';
+
+function playFlipSound() {
+  if (!state.soundEnabled) return;
+  try {
+    coinAudio.currentTime = 0;
+    coinAudio.play().catch(() => {});
+  } catch {}
+}
+
+// playLandSound is no longer needed — the MP3 covers the full SFX.
+// Kept as no-op so call sites don't break.
+function playLandSound(_isHeads: boolean) {}
+
+function vibrate() {
+  try { navigator.vibrate?.(50); } catch {}
+}
+
+// ---------- Stats update ----------
+function addResult(side: 'H' | 'T') {
+  state.totalFlips++;
+  if (side === 'H') state.headsCount++;
+  else state.tailsCount++;
+
+  // Streak
+  if (state.currentStreak.side === side) {
+    state.currentStreak.count++;
+  } else {
+    state.currentStreak = { side, count: 1 };
+  }
+
+  if (state.currentStreak.count > state.longestStreak.count) {
+    state.longestStreak = { ...state.currentStreak };
+  }
+
+  // History (last 30)
+  state.history.unshift(side);
+  if (state.history.length > 30) state.history.pop();
+
+  // Best-of tracking
+  if (state.bestofN > 0) {
+    if (side === 'H') state.bestofHeadsWins++;
+    else state.bestofTailsWins++;
+  }
+
+  updateStatsUI();
+}
+
+function updateStatsUI() {
+  // Total
+  const totalEl = document.getElementById('stat-total');
+  if (totalEl) totalEl.textContent = state.totalFlips.toString();
+
+  // Counts & %
+  const headsEl = document.getElementById('stat-heads');
+  const headsPctEl = document.getElementById('stat-heads-pct');
+  const tailsEl = document.getElementById('stat-tails');
+  const tailsPctEl = document.getElementById('stat-tails-pct');
+
+  const headsPct = state.totalFlips ? Math.round((state.headsCount / state.totalFlips) * 100) : 0;
+  const tailsPct = state.totalFlips ? Math.round((state.tailsCount / state.totalFlips) * 100) : 0;
+
+  if (headsEl) headsEl.textContent = state.headsCount.toString();
+  if (headsPctEl) headsPctEl.textContent = headsPct.toString();
+  if (tailsEl) tailsEl.textContent = state.tailsCount.toString();
+  if (tailsPctEl) tailsPctEl.textContent = tailsPct.toString();
+
+  // Bars
+  const barHeads = document.getElementById('bar-heads');
+  const barTails = document.getElementById('bar-tails');
+  if (barHeads) barHeads.style.width = `${headsPct}%`;
+  if (barTails) barTails.style.width = `${tailsPct}%`;
+
+  // Streaks
+  const streakEl = document.getElementById('stat-streak');
+  const longestEl = document.getElementById('stat-longest');
+  const getSideLabel = (s: string) => s === 'H' ? state.headsLabel : (s === 'T' ? state.tailsLabel : '—');
+
+  if (streakEl) {
+    streakEl.textContent = state.currentStreak.count > 0
+      ? `${state.currentStreak.count}× ${getSideLabel(state.currentStreak.side)}`
+      : '—';
+  }
+
+  if (longestEl) {
+    longestEl.textContent = state.longestStreak.count > 0
+      ? `${state.longestStreak.count}× ${getSideLabel(state.longestStreak.side)}`
+      : '—';
+  }
+
+  // Best-of UI
+  const bestofContainer = document.getElementById('bestof-score-container');
+  if (bestofContainer) {
+    if (state.bestofN > 0) {
+      bestofContainer.classList.remove('hidden');
+      bestofContainer.style.display = 'flex';
+      const label = document.getElementById('bestof-label');
+      if (label) label.textContent = `Best of ${state.bestofN}`;
+
+      const headsWinsEl = document.getElementById('bestof-heads-wins');
+      const tailsWinsEl = document.getElementById('bestof-tails-wins');
+      if (headsWinsEl) headsWinsEl.textContent = state.bestofHeadsWins.toString();
+      if (tailsWinsEl) tailsWinsEl.textContent = state.bestofTailsWins.toString();
+    } else {
+      bestofContainer.classList.add('hidden');
+      bestofContainer.style.display = 'none';
+    }
+  }
+
+  // History stream
+  const historyStream = document.getElementById('history-stream');
+  const historyEmpty = document.getElementById('history-empty');
+
+  if (historyStream && historyEmpty) {
+    if (state.history.length === 0) {
+      historyEmpty.classList.remove('hidden');
+      historyStream.innerHTML = '';
+    } else {
+      historyEmpty.classList.add('hidden');
+      historyStream.innerHTML = state.history.slice(0, 16).map(s => `
+        <span class="history-coin ${s === 'H' ? 'heads' : 'tails'}" title="${getSideLabel(s)}">${s}</span>
+      `).join('');
+    }
+  }
+}
+
+// ---------- Dynamic HTML & Responsive Sizing for multi-coins ----------
+function getCoinSizeConfig(count: number) {
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 640;
+  if (count === 1) {
+    return {
+      size: isMobile ? '170px' : '240px',
+      fontSize: isMobile ? '20px' : '28px',
+      subSize: isMobile ? '10px' : '12px',
+      shadowW: isMobile ? '120px' : '160px'
+    };
+  } else if (count === 2) {
+    return {
+      size: isMobile ? '110px' : '140px',
+      fontSize: isMobile ? '15px' : '20px',
+      subSize: isMobile ? '9px' : '10px',
+      shadowW: isMobile ? '80px' : '100px'
+    };
+  } else if (count === 3) {
+    return {
+      size: isMobile ? '85px' : '120px',
+      fontSize: isMobile ? '13px' : '18px',
+      subSize: isMobile ? '8px' : '9px',
+      shadowW: isMobile ? '65px' : '85px'
+    };
+  } else if (count === 4) {
+    return {
+      size: isMobile ? '72px' : '105px',
+      fontSize: isMobile ? '11px' : '16px',
+      subSize: isMobile ? '8px' : '9px',
+      shadowW: isMobile ? '55px' : '75px'
+    };
+  } else if (count === 5) {
+    return {
+      size: isMobile ? '64px' : '95px',
+      fontSize: isMobile ? '10px' : '14px',
+      subSize: isMobile ? '7px' : '8px',
+      shadowW: isMobile ? '48px' : '65px'
+    };
+  } else {
+    return {
+      size: isMobile ? '54px' : '80px',
+      fontSize: isMobile ? '9px' : '12px',
+      subSize: isMobile ? '6px' : '8px',
+      shadowW: isMobile ? '40px' : '55px'
+    };
+  }
+}
+
+function makeCoinHTML(id: number, count: number): string {
+  const { size, fontSize, subSize, shadowW } = getCoinSizeConfig(count);
+  return `
+    <div class="coin-wrapper">
+      <div class="coin" id="coin-${id}" style="width:${size};height:${size};">
+        <div class="coin-edge-ring"></div>
+        <div class="coin-face coin-face-front">
+          <div class="text-center leading-tight">
+            <div style="font-size:${fontSize};font-weight:700;" class="coin-label-h">${state.headsLabel.slice(0,4)}</div>
+            <div style="font-size:${subSize};font-weight:400;opacity:0.7;margin-top:2px;" class="coin-sublabel-h">${state.headsLabel.toUpperCase()}</div>
+          </div>
+        </div>
+        <div class="coin-face coin-face-back">
+          <div class="text-center leading-tight">
+            <div style="font-size:${fontSize};font-weight:700;" class="coin-label-t">${state.tailsLabel.slice(0,4)}</div>
+            <div style="font-size:${subSize};font-weight:400;opacity:0.7;margin-top:2px;" class="coin-sublabel-t">${state.tailsLabel.toUpperCase()}</div>
+          </div>
+        </div>
+      </div>
+      <div class="coin-shadow" id="shadow-${id}" style="width:${shadowW};"></div>
+    </div>
+  `;
+}
+
+function updateCoinLabelsOnCoins() {
+  const hLabel = document.getElementById('heads-label-display');
+  const hSub = document.getElementById('heads-sublabel');
+  const tLabel = document.getElementById('tails-label-display');
+  const tSub = document.getElementById('tails-sublabel');
+
+  if (hLabel) hLabel.textContent = state.headsLabel.slice(0, 4);
+  if (hSub) hSub.textContent = state.headsLabel.toUpperCase();
+  if (tLabel) tLabel.textContent = state.tailsLabel.slice(0, 4);
+  if (tSub) tSub.textContent = state.tailsLabel.toUpperCase();
+
+  const bestofH = document.getElementById('bestof-heads-name');
+  const bestofT = document.getElementById('bestof-tails-name');
+  if (bestofH) bestofH.textContent = state.headsLabel;
+  if (bestofT) bestofT.textContent = state.tailsLabel;
+
+  // Multi coins
+  document.querySelectorAll('.coin-label-h').forEach(el => el.textContent = state.headsLabel.slice(0, 4));
+  document.querySelectorAll('.coin-sublabel-h').forEach(el => el.textContent = state.headsLabel.toUpperCase());
+  document.querySelectorAll('.coin-label-t').forEach(el => el.textContent = state.tailsLabel.slice(0, 4));
+  document.querySelectorAll('.coin-sublabel-t').forEach(el => el.textContent = state.tailsLabel.toUpperCase());
+}
+
+function renderCoins(count: number) {
+  const container = document.getElementById('coins-container')!;
+  if (count === 1) {
+    const { size, fontSize, subSize, shadowW } = getCoinSizeConfig(1);
+    container.innerHTML = `
+      <div class="coin-wrapper" id="coin-0">
+        <div class="coin" id="single-coin" role="button" tabindex="0" aria-label="Coin — click to flip" style="width:${size};height:${size};">
+          <div class="coin-edge-ring"></div>
+          <div class="coin-face coin-face-front">
+            <div class="text-center leading-tight">
+              <div style="font-size:${fontSize};font-weight:700;" id="heads-label-display">${state.headsLabel.slice(0,4)}</div>
+              <div style="font-size:${subSize};font-weight:400;opacity:0.7;margin-top:2px;" id="heads-sublabel">${state.headsLabel.toUpperCase()}</div>
+            </div>
+          </div>
+          <div class="coin-face coin-face-back">
+            <div class="text-center leading-tight">
+              <div style="font-size:${fontSize};font-weight:700;" id="tails-label-display">${state.tailsLabel.slice(0,4)}</div>
+              <div style="font-size:${subSize};font-weight:400;opacity:0.7;margin-top:2px;" id="tails-sublabel">${state.tailsLabel.toUpperCase()}</div>
+            </div>
+          </div>
+        </div>
+        <div class="coin-shadow" id="coin-0-shadow" style="width:${shadowW};"></div>
+      </div>
+    `;
+    // Re-bind click on single coin
+    document.getElementById('single-coin')?.addEventListener('click', () => doFlip());
+    document.getElementById('single-coin')?.addEventListener('keydown', (e: Event) => {
+      if ((e as KeyboardEvent).key === 'Enter' || (e as KeyboardEvent).key === ' ') {
+        e.preventDefault();
+        doFlip();
+      }
+    });
+  } else {
+    container.innerHTML = Array.from({ length: count }, (_, i) => makeCoinHTML(i, count)).join('');
+  }
+}
+
+// ---------- Flip logic ----------
+// Shadow animation helper — runs on rAF during coin flight
+function animateShadow(shadowEl: HTMLElement, duration: number) {
+  const start = performance.now();
+  function frame(now: number) {
+    const t = Math.min((now - start) / duration, 1);
+    // arc: goes down (0→0.5) then back up (0.5→1)
+    const arc = Math.sin(t * Math.PI); // 0 → 1 → 0
+    // When coin is high: shadow shrinks and fades
+    const scale = 1 - arc * 0.65;  // 1 → 0.35 → 1
+    const opacity = 1 - arc * 0.7; // 1 → 0.3 → 1
+    shadowEl.style.transform = `scale(${scale.toFixed(3)})`;
+    shadowEl.style.opacity = opacity.toFixed(3);
+    if (t < 1) requestAnimationFrame(frame);
+    else {
+      shadowEl.style.transform = 'scale(1)';
+      shadowEl.style.opacity = '1';
+    }
+  }
+  requestAnimationFrame(frame);
+}
+
+function flipSingle(): Promise<'H' | 'T'> {
+  return new Promise(resolve => {
+    const coin = document.getElementById('single-coin') || document.getElementById('coin-0');
+    const shadow = document.getElementById('coin-0-shadow') || document.getElementById('shadow-0');
+    if (!coin) { resolve(Math.random() < 0.5 ? 'H' : 'T'); return; }
+
+    const result: 'H' | 'T' = Math.random() < 0.5 ? 'H' : 'T';
+    coin.classList.remove('spinning', 'landing-heads', 'landing-tails');
+    void (coin as HTMLElement).offsetWidth; // reflow
+
+    playFlipSound();
+    vibrate();
+
+    if (shadow) animateShadow(shadow, 1200);
+    coin.classList.add('spinning');
+
+    setTimeout(() => {
+      coin.classList.remove('spinning');
+      coin.classList.add(result === 'H' ? 'landing-heads' : 'landing-tails');
+      playLandSound(result === 'H');
+      vibrate();
+      setTimeout(() => resolve(result), 400);
+    }, 800);
+  });
+}
+
+function flipMultiple(count: number): Promise<('H' | 'T')[]> {
+  return new Promise(resolve => {
+    const results: ('H' | 'T')[] = Array.from({ length: count }, () => Math.random() < 0.5 ? 'H' : 'T');
+    const coins = Array.from({ length: count }, (_, i) =>
+      document.getElementById(`coin-${i}`)
+    ).filter(Boolean) as HTMLElement[];
+
+    playFlipSound();
+    vibrate();
+
+    coins.forEach(coin => {
+      coin.classList.remove('spinning', 'landing-heads', 'landing-tails');
+    });
+
+    setTimeout(() => {
+      coins.forEach((coin, i) => {
+        const shadow = document.getElementById(`shadow-${i}`);
+        if (shadow) animateShadow(shadow, 1200);
+        coin.classList.add('spinning');
+        setTimeout(() => {
+          coin.classList.remove('spinning');
+          coin.classList.add(results[i] === 'H' ? 'landing-heads' : 'landing-tails');
+        }, 800 + i * 30);
+      });
+      setTimeout(() => {
+        playLandSound(results.filter(r => r === 'H').length > results.length / 2);
+        resolve(results);
+      }, 1200);
+    }, 50);
+  });
+}
+
+async function doFlip() {
+  if (state.isFlipping) return;
+  state.isFlipping = true;
+
+  const flipBtn = document.getElementById('flip-btn') as HTMLButtonElement;
+  flipBtn.disabled = true;
+  flipBtn.textContent = 'Jogando…';
+
+  const resultText = document.getElementById('result-text')!;
+  const resultSub = document.getElementById('result-sub')!;
+
+  resultText.style.opacity = '0';
+  resultSub.style.opacity = '0';
+
+  if (state.coinCount === 1) {
+    const result = await flipSingle();
+    addResult(result);
+
+    const isHeads = result === 'H';
+    const sideName = isHeads ? state.headsLabel : state.tailsLabel;
+    resultText.textContent = sideName;
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    resultText.style.color = isHeads ? (isDark ? '#ffe680' : '#b8860b') : (isDark ? '#ffffff' : '#1d1d1f');
+    resultSub.textContent = `Caiu em ${sideName}`;
+
+    resultText.style.opacity = '1';
+    resultSub.style.opacity = '1';
+
+    // Check Best-of winner
+    if (state.bestofN > 0) {
+      const target = Math.ceil(state.bestofN / 2);
+      if (state.bestofHeadsWins >= target || state.bestofTailsWins >= target) {
+        const winner = state.bestofHeadsWins >= target ? state.headsLabel : state.tailsLabel;
+        setTimeout(() => triggerBestofWin(winner), 500);
+      }
+    }
+  } else {
+    const results = await flipMultiple(state.coinCount);
+    results.forEach(r => addResult(r));
+
+    const hCount = results.filter(r => r === 'H').length;
+    const tCount = results.length - hCount;
+
+    resultText.textContent = `${hCount} Cara · ${tCount} Coroa`;
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    resultText.style.color = isDark ? '#ffffff' : '#1d1d1f';
+    resultSub.textContent = `${state.coinCount} moedas lançadas`;
+
+    resultText.style.opacity = '1';
+    resultSub.style.opacity = '1';
+  }
+
+  state.isFlipping = false;
+  flipBtn.disabled = false;
+  flipBtn.innerHTML = `
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" class="shrink-0">
+      <path d="M1 4v6h6M23 20v-6h-6"/>
+      <path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4-4.64 4.36A9 9 0 0 1 3.51 15"/>
+    </svg>
+    Jogar a moeda!
+  `;
+}
+
+// ---------- Confetti ----------
+function triggerConfetti() {
+  const colors = ['#ffe680', '#d4a017', '#ffffff', '#0066cc', '#2997ff'];
+  for (let i = 0; i < 60; i++) {
+    const piece = document.createElement('div');
+    piece.className = 'confetti-piece';
+    piece.style.left = `${Math.random() * 100}vw`;
+    piece.style.top = '-10px';
+    piece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+    piece.style.width = `${Math.random() * 10 + 6}px`;
+    piece.style.height = `${Math.random() * 10 + 6}px`;
+    piece.style.animationDuration = `${Math.random() * 2 + 1.5}s`;
+    piece.style.animationDelay = `${Math.random() * 0.5}s`;
+    document.body.appendChild(piece);
+    setTimeout(() => piece.remove(), 3500);
+  }
+}
+
+function triggerBestofWin(winnerName: string) {
+  triggerConfetti();
+  alert(`🏆 ${winnerName} Vence o Torneio Melhor de ${state.bestofN}!`);
+  // Reset bestof score
+  state.bestofHeadsWins = 0;
+  state.bestofTailsWins = 0;
+  updateStatsUI();
+}
+
+// ---------- Reset ----------
+function resetStats() {
+  state.totalFlips = 0;
+  state.headsCount = 0;
+  state.tailsCount = 0;
+  state.currentStreak = { side: '', count: 0 };
+  state.longestStreak = { side: '', count: 0 };
+  state.history = [];
+  state.bestofHeadsWins = 0;
+  state.bestofTailsWins = 0;
+
+  const resultText = document.getElementById('result-text');
+  const resultSub = document.getElementById('result-sub');
+  if (resultText) { resultText.textContent = ''; resultText.style.opacity = '0'; }
+  if (resultSub) { resultSub.textContent = ''; resultSub.style.opacity = '0'; }
+
+  updateStatsUI();
+}
+
+// ---------- Event Listeners ----------
+document.addEventListener('DOMContentLoaded', () => {
+  // Single coin click
+  document.getElementById('single-coin')?.addEventListener('click', () => doFlip());
+  document.getElementById('flip-btn')?.addEventListener('click', () => doFlip());
+  document.getElementById('reset-btn')?.addEventListener('click', () => resetStats());
+
+  // Sound toggle
+  const soundBtn = document.getElementById('sound-btn');
+  const soundOnIcon = document.getElementById('sound-on-icon');
+  const soundOffIcon = document.getElementById('sound-off-icon');
+
+  soundBtn?.addEventListener('click', () => {
+    state.soundEnabled = !state.soundEnabled;
+    if (state.soundEnabled) {
+      soundOnIcon?.classList.remove('hidden');
+      soundOffIcon?.classList.add('hidden');
+    } else {
+      soundOnIcon?.classList.add('hidden');
+      soundOffIcon?.classList.remove('hidden');
+    }
+  });
+
+  // Coin count select dropdown
+  const coinCountSelect = document.getElementById('coin-count-select') as HTMLSelectElement;
+  coinCountSelect?.addEventListener('change', () => {
+    if (state.isFlipping) return;
+    const count = parseInt(coinCountSelect.value, 10);
+    state.coinCount = count;
+    renderCoins(count);
+  });
+
+  // Window resize handler (re-adjust coin sizing when rotating mobile device)
+  let resizeTimeout: any;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+      renderCoins(state.coinCount);
+    }, 150);
+  });
+
+  // Best-of select
+  const bestofSelect = document.getElementById('bestof-select') as HTMLSelectElement;
+  bestofSelect?.addEventListener('change', () => {
+    state.bestofN = parseInt(bestofSelect.value, 10);
+    state.bestofHeadsWins = 0;
+    state.bestofTailsWins = 0;
+    updateStatsUI();
+  });
+
+  // Customize modal
+  const modal = document.getElementById('customize-modal')!;
+  const customizeBtn = document.getElementById('customize-btn');
+  const cancelBtn = document.getElementById('customize-cancel');
+  const saveBtn = document.getElementById('customize-save');
+  const inputHeads = document.getElementById('custom-heads') as HTMLInputElement;
+  const inputTails = document.getElementById('custom-tails') as HTMLInputElement;
+
+  customizeBtn?.addEventListener('click', () => {
+    inputHeads.value = state.headsLabel;
+    inputTails.value = state.tailsLabel;
+    modal.classList.add('open');
+  });
+
+  cancelBtn?.addEventListener('click', () => modal.classList.remove('open'));
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) modal.classList.remove('open');
+  });
+
+  saveBtn?.addEventListener('click', () => {
+    const h = inputHeads.value.trim();
+    const t = inputTails.value.trim();
+    if (h) state.headsLabel = h;
+    if (t) state.tailsLabel = t;
+    updateCoinLabelsOnCoins();
+    updateStatsUI();
+    modal.classList.remove('open');
+  });
+
+  // Keyboard shortcuts
+  document.addEventListener('keydown', (e) => {
+    // Ignore if input is focused
+    if (['INPUT', 'TEXTAREA', 'SELECT'].includes((e.target as HTMLElement).tagName)) return;
+    if (modal.classList.contains('open')) return;
+
+    if (e.code === 'Space') {
+      e.preventDefault();
+      doFlip();
+    } else if (e.code === 'KeyR') {
+      resetStats();
+    }
+  });
+});
+</script>

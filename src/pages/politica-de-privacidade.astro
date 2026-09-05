@@ -1,0 +1,85 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout
+  title="Política de Privacidade — Cara ou Coroa Virtual"
+  description="Leia a política de privacidade do Cara ou Coroa Virtual. Nenhum dado pessoal é coletado, armazenado ou compartilhado. Totalmente gratuito e sem rastreamento."
+  canonicalUrl="https://caraoucoroavirtual.com/politica-de-privacidade"
+>
+  <Nav />
+
+  <main class="bg-canvas dark:bg-surface-black min-h-[100svh] pt-16">
+    <!-- Page Hero -->
+    <section class="tile-dark tile-padding py-16">
+      <div class="container-content max-w-[760px] mx-auto text-center">
+        <p class="text-sm font-semibold tracking-[0.231px] text-primary-dark mb-3 uppercase">Legal</p>
+        <h1 class="text-display-lg text-on-dark mb-4 mt-0">Política de Privacidade</h1>
+        <p class="text-lead text-body-muted m-0">Última atualização: setembro de 2026</p>
+      </div>
+    </section>
+
+    <!-- Content -->
+    <section class="tile-light tile-padding">
+      <div class="container-content max-w-[760px] mx-auto prose-like space-y-8 text-[17px] text-ink-muted leading-relaxed">
+
+        <div>
+          <h2 class="text-xl font-semibold text-ink mb-3 mt-0">1. Introdução</h2>
+          <p class="m-0">O <strong class="text-ink">Cara ou Coroa Virtual</strong> (<a href="https://caraoucoroavirtual.com" class="text-primary hover:underline">caraoucoroavirtual.com</a>) é um simulador gratuito de cara ou coroa online. Esta Política de Privacidade descreve como tratamos (ou não tratamos) as informações dos visitantes do nosso site. Ao utilizar o site, você concorda com os termos descritos abaixo.</p>
+        </div>
+
+        <div>
+          <h2 class="text-xl font-semibold text-ink mb-3 mt-0">2. Dados que Não Coletamos</h2>
+          <p class="m-0">O Cara ou Coroa Virtual foi projetado com privacidade como prioridade. <strong class="text-ink">Não coletamos, armazenamos, processamos ou transmitimos nenhum dado pessoal.</strong> Especificamente:</p>
+          <ul class="list-disc pl-6 mt-3 space-y-1.5">
+            <li>Não usamos cookies de rastreamento ou analytics</li>
+            <li>Não usamos Google Analytics, Facebook Pixel ou ferramentas similares</li>
+            <li>Não solicitamos nome, e-mail, telefone ou qualquer dado de identificação</li>
+            <li>Não armazenamos resultados de lançamentos ou histórico de uso</li>
+            <li>Não criamos perfis de usuário de nenhuma forma</li>
+            <li>Não vendemos, alugamos ou compartilhamos dados com terceiros</li>
+          </ul>
+        </div>
+
+        <div>
+          <h2 class="text-xl font-semibold text-ink mb-3 mt-0">3. Dados de Sessão Local</h2>
+          <p class="m-0">As estatísticas de lançamento (contagens de cara e coroa, sequências, histórico) existem <strong class="text-ink">apenas na memória do seu navegador</strong> durante a sua visita. Esses dados nunca são enviados para nenhum servidor. Quando você fecha a aba ou o navegador, todos os dados são automaticamente apagados. Não utilizamos <code class="bg-black/5 px-1.5 py-0.5 rounded font-mono text-sm">localStorage</code>, <code class="bg-black/5 px-1.5 py-0.5 rounded font-mono text-sm">sessionStorage</code> ou cookies para persistir nenhuma informação.</p>
+        </div>
+
+        <div>
+          <h2 class="text-xl font-semibold text-ink mb-3 mt-0">4. Cookies</h2>
+          <p class="m-0">Este site <strong class="text-ink">não utiliza cookies</strong> de nenhum tipo — nem funcionais, nem analíticos, nem de publicidade. Não há banner de cookies porque simplesmente não há cookies para gerenciar.</p>
+        </div>
+
+        <div>
+          <h2 class="text-xl font-semibold text-ink mb-3 mt-0">5. Serviços de Terceiros</h2>
+          <p class="m-0">O site carrega a fonte <strong>Inter</strong> do Google Fonts. O Google Fonts processa o endereço IP do visitante para entregar os arquivos de fonte. Recomendamos consultar a <a href="https://policies.google.com/privacy" class="text-primary hover:underline" target="_blank" rel="noopener noreferrer">Política de Privacidade do Google</a> para mais informações. Nenhum outro serviço de terceiros é utilizado.</p>
+        </div>
+
+        <div>
+          <h2 class="text-xl font-semibold text-ink mb-3 mt-0">6. Menores de Idade</h2>
+          <p class="m-0">Este site é adequado para todas as idades. Como não coletamos nenhum dado pessoal, não há preocupações específicas com relação à privacidade de menores. O simulador de cara ou coroa é uma ferramenta educacional e de lazer segura.</p>
+        </div>
+
+        <div>
+          <h2 class="text-xl font-semibold text-ink mb-3 mt-0">7. Alterações nesta Política</h2>
+          <p class="m-0">Podemos atualizar esta política ocasionalmente. Quaisquer alterações serão refletidas nesta página com uma nova data de atualização. Como não coletamos e-mails, não é possível notificá-lo diretamente sobre mudanças.</p>
+        </div>
+
+        <div>
+          <h2 class="text-xl font-semibold text-ink mb-3 mt-0">8. Contato</h2>
+          <p class="m-0">Em caso de dúvidas sobre esta política de privacidade, entre em contato através da nossa <a href="/contato" class="text-primary hover:underline">página de contato</a>.</p>
+        </div>
+
+        <div class="border-t border-hairline pt-6">
+          <p class="text-sm text-ink-faint m-0">Esta política está em conformidade com a Lei Geral de Proteção de Dados (LGPD — Lei nº 13.709/2018) e com o Regulamento Geral de Proteção de Dados da União Europeia (GDPR).</p>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>

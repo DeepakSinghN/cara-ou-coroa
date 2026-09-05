@@ -1,11 +1,326 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import Nav from '../components/Nav.astro';
+import CoinApp from '../components/CoinApp.astro';
+import Footer from '../components/Footer.astro';
 ---
 
-<Layout>
-	<Welcome />
+<Layout
+  title="Cara ou Coroa Online — Jogar Grátis | Cara ou Corôa Virtual | Moeda Virtual"
+  description="Cara ou coroa online grátis. Jogue cara ou corôa virtual com animação 3D real, estatísticas ao vivo, modo multi-moeda e modos de torneio. Sem cadastro. Sem anúncios. Disponível no Google."
+>
+  <!-- ── NAVEGAÇÃO ─────────────────────────────────────── -->
+  <Nav />
+
+  <!-- ── BLOCO 1: Aplicativo Principal ───────────────── -->
+  <CoinApp />
+
+  <!-- ── BLOCO 2 (CLARO): Como Funciona ──────────────── -->
+  <section id="como-funciona" class="tile-light tile-padding" aria-labelledby="como-title">
+    <div class="container-content text-center">
+      <p class="text-sm font-semibold tracking-[0.231px] text-primary mb-2 uppercase">Simples e Rápido</p>
+      <h2 id="como-title" class="text-display-lg text-ink mb-3 mt-0">Como Funciona</h2>
+      <p class="text-lead text-ink-muted mb-14 max-w-[600px] mx-auto mt-0">Três passos. Zero configuração. Nenhuma conta necessária.</p>
+
+      <div class="grid grid-cols-[repeat(auto-fit,minmax(220px,1fr))] gap-8 text-left">
+        <!-- Passo 1 -->
+        <div class="p-8 bg-parchment rounded-lg">
+          <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center mb-5">
+            <span class="text-white text-xl font-bold">1</span>
+          </div>
+          <h3 class="text-[17px] font-semibold text-ink mb-2 mt-0 tracking-[-0.374px]">Escolha seu modo</h3>
+          <p class="text-sm text-ink-faint m-0 leading-relaxed">Lance uma moeda, use o modo multi-moeda (até 5), ou jogue um torneio Melhor de 3/5. Personalize os rótulos para qualquer decisão.</p>
+        </div>
+
+        <!-- Passo 2 -->
+        <div class="p-8 bg-parchment rounded-lg">
+          <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center mb-5">
+            <span class="text-white text-xl font-bold">2</span>
+          </div>
+          <h3 class="text-[17px] font-semibold text-ink mb-2 mt-0 tracking-[-0.374px]">Lance a moeda</h3>
+          <p class="text-sm text-ink-faint m-0 leading-relaxed">Clique no botão Lançar, toque na moeda, ou pressione <kbd class="bg-black/8 px-1.5 py-0.5 rounded font-mono text-xs">Espaço</kbd>. Uma animação 3D real gira a moeda e a pousa aleatoriamente.</p>
+        </div>
+
+        <!-- Passo 3 -->
+        <div class="p-8 bg-parchment rounded-lg">
+          <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center mb-5">
+            <span class="text-white text-xl font-bold">3</span>
+          </div>
+          <h3 class="text-[17px] font-semibold text-ink mb-2 mt-0 tracking-[-0.374px]">Acompanhe os resultados</h3>
+          <p class="text-sm text-ink-faint m-0 leading-relaxed">Veja as estatísticas ao vivo atualizarem instantaneamente — contagens, percentuais, sequência atual e histórico visual de cada lançamento.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── BLOCO 3 (ESCURO): Recursos ──────────────────── -->
+  <section id="recursos" class="tile-dark tile-padding" aria-labelledby="recursos-title">
+    <div class="container-content text-center">
+      <p class="text-sm font-semibold tracking-[0.231px] text-primary-dark mb-2 uppercase">Mais do que uma Moeda</p>
+      <h2 id="recursos-title" class="text-display-lg text-on-dark mb-3 mt-0">Feito para Decisões Reais</h2>
+      <p class="text-lead text-body-muted mb-14 max-w-[600px] mx-auto mt-0">Tudo o que você precisa, nada do que não precisa.</p>
+
+      <div class="grid grid-cols-[repeat(auto-fit,minmax(260px,1fr))] gap-6 text-left">
+        <div class="bg-white/6 border border-white/10 rounded-lg p-7">
+          <div class="text-3xl mb-4" aria-hidden="true">🪙</div>
+          <h3 class="text-[17px] font-semibold text-on-dark mb-2 mt-0">Física 3D da Moeda</h3>
+          <p class="text-sm text-body-muted m-0 leading-relaxed">Animação 3D CSS real com perspectiva e moeda metálica dourada e prateada. Pousa com um quique satisfatório.</p>
+        </div>
+
+        <div class="bg-white/6 border border-white/10 rounded-lg p-7">
+          <div class="text-3xl mb-4" aria-hidden="true">🎰</div>
+          <h3 class="text-[17px] font-semibold text-on-dark mb-2 mt-0">Modo Multi-Moeda</h3>
+          <p class="text-sm text-body-muted m-0 leading-relaxed">Lance 2, 3, 4 ou 5 moedas de uma vez. Obtenha um resumo instantâneo — perfeito para votações em grupo ou decisões por maioria.</p>
+        </div>
+
+        <div class="bg-white/6 border border-white/10 rounded-lg p-7">
+          <div class="text-3xl mb-4" aria-hidden="true">✏️</div>
+          <h3 class="text-[17px] font-semibold text-on-dark mb-2 mt-0">Rótulos Personalizados</h3>
+          <p class="text-sm text-body-muted m-0 leading-relaxed">Substitua "Cara / Coroa" por qualquer coisa: "Sim / Não", "Pizza / Sushi", "Casa / Fora". Sua decisão, seus rótulos.</p>
+        </div>
+
+        <div class="bg-white/6 border border-white/10 rounded-lg p-7">
+          <div class="text-3xl mb-4" aria-hidden="true">📊</div>
+          <h3 class="text-[17px] font-semibold text-on-dark mb-2 mt-0">Estatísticas ao Vivo</h3>
+          <p class="text-sm text-body-muted m-0 leading-relaxed">Acompanhe contagens, percentuais, sequência atual e maior sequência. Histórico visual de cada lançamento da sessão.</p>
+        </div>
+
+        <div class="bg-white/6 border border-white/10 rounded-lg p-7">
+          <div class="text-3xl mb-4" aria-hidden="true">🏆</div>
+          <h3 class="text-[17px] font-semibold text-on-dark mb-2 mt-0">Modo Melhor de 3/5/7</h3>
+          <p class="text-sm text-body-muted m-0 leading-relaxed">Jogue torneios Melhor de 3, 5 ou 7. O primeiro lado a atingir a maioria vence — com chuva de confetes!</p>
+        </div>
+
+        <div class="bg-white/6 border border-white/10 rounded-lg p-7">
+          <div class="text-3xl mb-4" aria-hidden="true">🔊</div>
+          <h3 class="text-[17px] font-semibold text-on-dark mb-2 mt-0">Som e Vibração</h3>
+          <p class="text-sm text-body-muted m-0 leading-relaxed">Efeito sonoro real de moeda. Vibração háptica no celular. Desative a qualquer momento — sem interrupções.</p>
+        </div>
+
+        <div class="bg-white/6 border border-white/10 rounded-lg p-7">
+          <div class="text-3xl mb-4" aria-hidden="true">🌙</div>
+          <h3 class="text-[17px] font-semibold text-on-dark mb-2 mt-0">Modo Escuro e Claro</h3>
+          <p class="text-sm text-body-muted m-0 leading-relaxed">Padrão modo claro. Alterne manualmente com um toque. Confortável para os olhos à noite.</p>
+        </div>
+
+        <div class="bg-white/6 border border-white/10 rounded-lg p-7">
+          <div class="text-3xl mb-4" aria-hidden="true">⌨️</div>
+          <h3 class="text-[17px] font-semibold text-on-dark mb-2 mt-0">Atalhos do Teclado</h3>
+          <p class="text-sm text-body-muted m-0 leading-relaxed">Pressione <kbd class="bg-white/15 px-1.5 py-0.5 rounded font-mono text-xs">Espaço</kbd> para lançar, <kbd class="bg-white/15 px-1.5 py-0.5 rounded font-mono text-xs">R</kbd> para reiniciar. Sem mouse necessário.</p>
+        </div>
+
+        <div class="bg-white/6 border border-white/10 rounded-lg p-7">
+          <div class="text-3xl mb-4" aria-hidden="true">🔒</div>
+          <h3 class="text-[17px] font-semibold text-on-dark mb-2 mt-0">Zero Coleta de Dados</h3>
+          <p class="text-sm text-body-muted m-0 leading-relaxed">Sem cookies. Sem rastreamento. Sem contas. As estatísticas vivem apenas na memória do navegador durante sua visita e somem ao fechar a aba.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── BLOCO 4 (PERGAMINHO): Quando Usar ───────────── -->
+  <section id="casos-de-uso" class="tile-parchment tile-padding" aria-labelledby="usecases-title">
+    <div class="container-content text-center">
+      <p class="text-sm font-semibold tracking-[0.231px] text-primary mb-2 uppercase">Usos Infinitos</p>
+      <h2 id="usecases-title" class="text-display-lg text-ink mb-3 mt-0">Onde Você Vai Lançar?</h2>
+      <p class="text-lead text-ink-muted mb-14 max-w-[600px] mx-auto mt-0">De decisões diárias a esportes — uma moeda justa é sempre a resposta.</p>
+
+      <div class="grid grid-cols-[repeat(auto-fit,minmax(180px,1fr))] gap-5 text-left">
+        <div class="bg-canvas border border-hairline rounded-lg p-6">
+          <div class="text-3xl mb-3" aria-hidden="true">🍕</div>
+          <h3 class="text-xs font-semibold text-ink mb-1.5 mt-0">Decisões do Dia a Dia</h3>
+          <p class="text-xs text-ink-faint m-0 leading-normal">Não consegue decidir o que comer, assistir ou fazer? Deixe a moeda escolher por você.</p>
+        </div>
+
+        <div class="bg-canvas border border-hairline rounded-lg p-6">
+          <div class="text-3xl mb-3" aria-hidden="true">🎮</div>
+          <h3 class="text-xs font-semibold text-ink mb-1.5 mt-0">Jogos de Mesa e Cartas</h3>
+          <p class="text-xs text-ink-faint m-0 leading-normal">Determine quem começa, resolva empates ou tire dúvidas sem uma moeda física.</p>
+        </div>
+
+        <div class="bg-canvas border border-hairline rounded-lg p-6">
+          <div class="text-3xl mb-3" aria-hidden="true">⚽</div>
+          <h3 class="text-xs font-semibold text-ink mb-1.5 mt-0">Esportes e Torneios</h3>
+          <p class="text-xs text-ink-faint m-0 leading-normal">Sorteio de campo, escolha de lado e distribuição de chaves — rápido e justo em qualquer dispositivo.</p>
+        </div>
+
+        <div class="bg-canvas border border-hairline rounded-lg p-6">
+          <div class="text-3xl mb-3" aria-hidden="true">🎲</div>
+          <h3 class="text-xs font-semibold text-ink mb-1.5 mt-0">Probabilidade e Estatística</h3>
+          <p class="text-xs text-ink-faint m-0 leading-normal">Ensine probabilidade em sala de aula. Faça 100 lançamentos no modo multi-moeda e veja a lei dos grandes números ao vivo.</p>
+        </div>
+
+        <div class="bg-canvas border border-hairline rounded-lg p-6">
+          <div class="text-3xl mb-3" aria-hidden="true">👥</div>
+          <h3 class="text-xs font-semibold text-ink mb-1.5 mt-0">Escolhas em Grupo</h3>
+          <p class="text-xs text-ink-faint m-0 leading-normal">Use o modo multi-moeda para votações por maioria em grupo — todo mundo lança, quem tiver mais vence.</p>
+        </div>
+
+        <div class="bg-canvas border border-hairline rounded-lg p-6">
+          <div class="text-3xl mb-3" aria-hidden="true">🧪</div>
+          <h3 class="text-xs font-semibold text-ink mb-1.5 mt-0">Testes A/B e Sorteios</h3>
+          <p class="text-xs text-ink-faint m-0 leading-normal">Aleatorize a ordem de testes, escolha qual design mostrar primeiro ou selecione uma amostra ao acaso.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── BLOCO 5 (ESCURO-2): História + SEO Content ─── -->
+  <section class="tile-dark-2 tile-padding" aria-labelledby="sobre-title">
+    <div class="container-content max-w-[720px] text-center mx-auto">
+      <p class="text-sm font-semibold tracking-[0.231px] text-primary-dark mb-2 uppercase">Você Sabia?</p>
+      <h2 id="sobre-title" class="text-display-lg text-on-dark mb-6 mt-0">Cara ou Coroa: 2.000 Anos de Decisões Justas</h2>
+      <p class="text-[17px] text-body-muted mb-5 leading-relaxed">O jogo de <strong class="text-on-dark font-semibold">cara ou coroa</strong> remonta à Roma antiga, onde era chamado de <em class="text-on-dark not-italic font-semibold">Navia aut Caput</em> — "Navio ou Cabeça" — batizado pelas imagens nas moedas romanas. O rosto de Júlio César aparecia em um lado, e o jogo se tornou uma forma popular de resolver disputas com autoridade divina: se o rosto do imperador caísse para cima, os deuses haviam decidido.</p>
+      <p class="text-[17px] text-body-muted mb-5 leading-relaxed">Na Inglaterra medieval tornou-se "Cruz e Pilha". Hoje o sorteio de moeda é usado na NFL para determinar qual time recebe o kickoff — assistido por mais de 100 milhões de pessoas só no Super Bowl.</p>
+      <p class="text-[17px] text-body-muted m-0 leading-relaxed">Uma moeda física não é perfeitamente justa — um estudo de 2023 com 350.757 lançamentos encontrou um leve viés em direção ao lado inicial (~51% de aterrisagem no mesmo lado). Nossa <strong class="text-on-dark font-semibold">moeda virtual cara ou coroa</strong> usa o gerador <code class="bg-white/10 px-1.5 py-0.5 rounded text-sm font-mono">Math.random()</code> do seu navegador — verdadeiramente 50/50 em cada lançamento.</p>
+    </div>
+  </section>
+
+  <!-- ── BLOCO 6 (CLARO): SEO — Sobre a Ferramenta ─── -->
+  <section class="tile-light tile-padding" aria-labelledby="seo-content-title">
+    <div class="container-content max-w-[800px] mx-auto">
+      <div class="text-center mb-12">
+        <p class="text-sm font-semibold tracking-[0.231px] text-primary mb-2 uppercase">Cara ou Coroa Online Grátis</p>
+        <h2 id="seo-content-title" class="text-display-lg text-ink m-0">O Melhor Cara ou Coroa Virtual do Brasil</h2>
+      </div>
+
+      <div class="prose-like space-y-8 text-[17px] text-ink-muted leading-relaxed">
+
+        <div>
+          <h3 class="text-xl font-semibold text-ink mb-3 mt-0">O Que é Cara ou Coroa?</h3>
+          <p class="m-0">
+            <strong class="text-ink">Cara ou coroa</strong> é um dos jogos mais antigos e universais da humanidade — um simples lançamento de moeda que entrega um resultado binário: cara (heads) ou coroa (tails). Conhecido mundialmente como <em>heads or tails</em> em inglês, o jogo é usado há milênios para tomar decisões rápidas, resolver disputas e realizar sorteios. No Brasil e em todos os países de língua portuguesa, o <strong class="text-ink">cara ou coroa online</strong> se tornou a forma digital mais prática de simular esse lançamento sem precisar de uma moeda física.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-xl font-semibold text-ink mb-3 mt-0">Como Jogar Cara ou Coroa Online</h3>
+          <p class="m-0">
+            Jogar <strong class="text-ink">cara ou corôa virtual</strong> aqui é extremamente simples. Basta acessar o site, clicar no botão "Lançar" ou diretamente na moeda, e em 1,4 segundos você tem seu resultado — com uma animação 3D realista que simula o movimento físico de uma moeda girando no ar e pousando com um quique satisfatório. Não há cadastro, login, cookies ou rastreamento de qualquer tipo. É o <strong class="text-ink">cara ou coroa no Google</strong> mais limpo e rápido que você vai encontrar.
+          </p>
+          <p class="mt-4 m-0">
+            Você também pode usar atalhos de teclado: pressione <kbd class="bg-black/8 px-1.5 py-0.5 rounded font-mono text-sm">Espaço</kbd> para lançar e <kbd class="bg-black/8 px-1.5 py-0.5 rounded font-mono text-sm">R</kbd> para reiniciar as estatísticas. No celular, um toque na moeda já lança — com vibração háptica em aparelhos Android compatíveis.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-xl font-semibold text-ink mb-3 mt-0">Por Que Usar Nossa Moeda Virtual?</h3>
+          <p class="m-0">
+            Diferente de outras ferramentas, o <strong class="text-ink">cara ou corôa jogo</strong> deste site foi construído com foco total na experiência do usuário. A animação é suave a 60fps com aceleração por hardware GPU. A moeda usa perspectiva CSS 3D real com acabamento metálico dourado (cara) e prateado (coroa). O efeito sonoro é um áudio real de moeda girando. E tudo isso funciona instantaneamente em qualquer dispositivo — celular, tablet ou computador.
+          </p>
+          <p class="mt-4 m-0">
+            Além do lançamento simples, você tem acesso a recursos avançados: modo multi-moeda para lançar até 5 moedas simultaneamente, modo Melhor de 3/5/7 para decidir torneios, rótulos personalizados (substitua "Cara/Coroa" por "Sim/Não" ou qualquer outra opção), estatísticas ao vivo com histórico visual, e modo escuro para uso noturno confortável.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-xl font-semibold text-ink mb-3 mt-0">Quando Usar o Cara ou Coroa?</h3>
+          <p class="m-0">
+            O <strong class="text-ink">google cara ou coroa</strong> — ou melhor, este site dedicado — é ideal para uma enorme variedade de situações. Use para decidir quem paga a conta no restaurante, qual série assistir, que lado do campo escolher no futebol, quem apresenta primeiro em reuniões, ou qualquer outra decisão que precise de um árbitro imparcial e instantâneo.
+          </p>
+          <p class="mt-4 m-0">
+            Em sala de aula, o modo multi-moeda é uma ferramenta poderosa para ensinar probabilidade e estatística — faça dezenas de lançamentos e observe a lei dos grandes números em ação ao vivo. Para professores de matemática e estatística, é um recurso visual e interativo que complementa qualquer aula sobre aleatoriedade e distribuições.
+          </p>
+          <p class="mt-4 m-0">
+            Para grupos e equipes, o modo Melhor de 3 ou Melhor de 5 elimina a necessidade de múltiplos lançamentos manuais — cada clique avança o placar automaticamente e um chuva de confetes celebra o vencedor.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-xl font-semibold text-ink mb-3 mt-0">É Realmente Aleatório?</h3>
+          <p class="m-0">
+            Sim. Cada lançamento usa o <code class="bg-black/5 px-1.5 py-0.5 rounded font-mono text-sm">Math.random()</code> do seu próprio navegador — um gerador de números pseudoaleatórios alimentado pelo pool de entropia do dispositivo. Isso garante exatamente 50% de probabilidade para cada lado em cada lançamento, sem padrões, sem histórico influenciando o próximo resultado, sem viés. Muito mais justo do que uma moeda física (que, como estudos mostram, tem leve tendência ao lado que estava para cima antes do lançamento).
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── BLOCO 7 (PERGAMINHO): Perguntas Frequentes ─── -->
+  <section id="perguntas-frequentes" class="tile-parchment tile-padding" aria-labelledby="faq-title">
+    <div class="container-content max-w-[720px] mx-auto">
+      <div class="text-center mb-12">
+        <p class="text-sm font-semibold tracking-[0.231px] text-primary mb-2 uppercase">Dúvidas e Respostas</p>
+        <h2 id="faq-title" class="text-display-lg text-ink m-0">Perguntas Frequentes</h2>
+      </div>
+
+      <div>
+        <details class="faq-item">
+          <summary>
+            Cara ou coroa?
+            <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </summary>
+          <div class="faq-answer">Cara ou coroa é um jogo de sorte baseado no lançamento de uma moeda. Cada face representa um resultado: <strong>cara</strong> (a face com o rosto ou símbolo principal) e <strong>coroa</strong> (a face reversa). O resultado é completamente aleatório, com 50% de probabilidade para cada lado. É usado há séculos para tomar decisões rápidas e imparciais em todo o mundo.</div>
+        </details>
+
+        <details class="faq-item">
+          <summary>
+            Qual é cara ou coroa?
+            <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </summary>
+          <div class="faq-answer"><strong>Cara</strong> é a face principal da moeda — normalmente a que exibe um rosto, símbolo ou efígie. <strong>Coroa</strong> é o verso da moeda — o lado oposto. Em inglês, equivalem a <em>heads</em> (cara) e <em>tails</em> (coroa). No nosso simulador virtual, a face dourada representa <strong>Cara</strong> e a face prateada representa <strong>Coroa</strong>.</div>
+        </details>
+
+        <details class="faq-item">
+          <summary>
+            Quantas vezes posso lançar a moeda virtual?
+            <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </summary>
+          <div class="faq-answer">Você pode lançar a moeda virtual <strong>quantas vezes quiser</strong>, sem qualquer limite. Não há restrições de uso, sem cotas diárias, sem planos pagos. O simulador de cara ou coroa é completamente gratuito e ilimitado — basta clicar em "Jogar a moeda!" ou pressionar a tecla <kbd class="bg-black/8 px-1.5 py-0.5 rounded font-mono text-xs">Espaço</kbd>.</div>
+        </details>
+
+        <details class="faq-item">
+          <summary>
+            Esta aplicação é gratuita?
+            <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </summary>
+          <div class="faq-answer">Sim, <strong>100% gratuita para sempre</strong>. O Cara ou Coroa Virtual não tem planos pagos, anúncios, assinaturas ou qualquer custo oculto. Todos os recursos — modo multi-moeda, estatísticas ao vivo, modo Melhor de 3/5/7, rótulos personalizados e modo escuro — estão disponíveis para todos sem nenhuma limitação.</div>
+        </details>
+
+        <details class="faq-item">
+          <summary>
+            Preciso ter uma conta para lançar a moeda online?
+            <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </summary>
+          <div class="faq-answer">Não. O Cara ou Coroa Virtual <strong>não exige cadastro, login ou conta de qualquer tipo</strong>. Basta acessar o site e começar a jogar imediatamente. Nenhum dado pessoal é solicitado ou armazenado. Todos os resultados ficam apenas na memória do seu navegador durante a sessão e desaparecem quando você fecha a aba.</div>
+        </details>
+
+        <details class="faq-item">
+          <summary>
+            Quantas faces tem a moeda virtual?
+            <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </summary>
+          <div class="faq-answer">A moeda virtual tem <strong>duas faces</strong>: <strong>Cara</strong> (face dourada, lado principal) e <strong>Coroa</strong> (face prateada, lado reverso). Você também pode personalizar os nomes — substitua "Cara" e "Coroa" por qualquer texto de até 12 caracteres, como "Sim/Não", "Pizza/Sushi" ou "Casa/Fora".</div>
+        </details>
+
+        <details class="faq-item">
+          <summary>
+            O que é mais provável sair, cara ou coroa?
+            <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </summary>
+          <div class="faq-answer">No nosso simulador, <strong>nenhum lado é mais provável que o outro</strong>. Cada lançamento tem exatamente <strong>50% de probabilidade</strong> para cara e 50% para coroa, usando o gerador <code>Math.random()</code> do navegador — estatisticamente independente e sem viés. Curiosidade: moedas físicas têm uma leve tendência ao lado que estava para cima (~51%), mas nossa moeda virtual é perfeitamente justa.</div>
+        </details>
+
+        <details class="faq-item">
+          <summary>
+            Qual é a diferença em relação à Cara ou Coroa do Google?
+            <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </summary>
+          <div class="faq-answer">O <strong>cara ou coroa do Google</strong> é uma funcionalidade básica integrada à busca — simples e funcional, mas sem recursos extras. O <strong>Cara ou Coroa Virtual</strong> vai muito além: animação 3D realista com som, estatísticas ao vivo (contagens, percentuais, sequências), modo multi-moeda (até 5 moedas simultâneas), torneio Melhor de 3/5/7, rótulos personalizados, modo escuro e atalhos de teclado — tudo gratuito, sem anúncios e sem cadastro.</div>
+        </details>
+
+        <details class="faq-item">
+          <summary>
+            Quais são os usos para o simulador de cara ou coroa?
+            <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </summary>
+          <div class="faq-answer">O simulador de cara ou coroa tem inúmeros usos: <strong>decisões do dia a dia</strong> (o que comer, assistir ou fazer); <strong>esportes e torneios</strong> (sorteio de campo, escolha de lado no futebol); <strong>jogos de mesa</strong> (quem começa, resolução de empates); <strong>votações em grupo</strong> (modo multi-moeda para decisão por maioria); <strong>educação</strong> (ensinar probabilidade e estatística); <strong>sorteios</strong> (escolha aleatória imparcial); e qualquer decisão que precise de um árbitro justo e instantâneo.</div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── RODAPÉ ─────────────────────────────────────── -->
+  <Footer />
 </Layout>

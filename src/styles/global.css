@@ -1,0 +1,674 @@
+@import "tailwindcss";
+
+/* ============================================================
+   DARK MODE — data-attribute driven (official Tailwind v4 pattern)
+   Docs: dark-mode.mdx § "Using a data attribute"
+   ============================================================ */
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
+/* ============================================================
+   DESIGN TOKENS — mapped from DESIGN.md (Apple design system)
+   Using @theme so every token also generates a utility class:
+     --color-primary  →  bg-primary, text-primary, border-primary …
+     --font-display   →  font-display
+     --radius-pill    →  rounded-pill
+   Docs: theme.mdx, functions-and-directives.mdx § @theme
+   ============================================================ */
+@theme {
+  /* --- Font families --- */
+  --font-display: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* --- Brand & Accent Colors --- */
+  --color-primary: #0066cc;
+  --color-primary-focus: #0071e3;
+  --color-primary-dark: #2997ff;
+
+  /* --- Text Colors --- */
+  --color-ink: #1d1d1f;
+  --color-ink-muted: #333333;
+  --color-ink-faint: #7a7a7a;
+  --color-body-muted: #cccccc;
+  --color-on-dark: #ffffff;
+  --color-on-primary: #ffffff;
+
+  /* --- Surface Colors (Light) --- */
+  --color-canvas: #ffffff;
+  --color-parchment: #f5f5f7;
+  --color-pearl: #fafafc;
+
+  /* --- Surface Colors (Dark) --- */
+  --color-surface-black: #000000;
+  --color-surface-dark: #272729;
+  --color-surface-dark-2: #2a2a2c;
+  --color-surface-dark-3: #252527;
+
+  /* --- Border/Divider --- */
+  --color-hairline: #e0e0e0;
+  --color-divider: #f0f0f0;
+  --color-chip: #d2d2d7;
+
+  /* --- Border Radius Scale (from DESIGN.md) --- */
+  --radius-xs: 5px;
+  --radius-sm: 8px;
+  --radius-md: 11px;
+  --radius-lg: 18px;
+  --radius-pill: 9999px;
+
+  /* --- Custom easing --- */
+  --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-coin: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+  /* --- Custom animations --- */
+  --animate-coin-spin: coinSpin 1s var(--ease-coin) forwards;
+  --animate-land-heads: coinLandHeads 0.4s var(--ease-bounce) forwards;
+  --animate-land-tails: coinLandTails 0.4s var(--ease-bounce) forwards;
+  --animate-confetti-fall: confettiFall linear forwards;
+}
+
+/* ============================================================
+   DARK MODE TOKEN OVERRIDES
+   Only override the tokens that change — tile dark surfaces stay
+   dark in both themes as they are content surfaces, not chrome.
+   ============================================================ */
+[data-theme="dark"] {
+  --color-canvas: #1c1c1e;
+  --color-parchment: #2c2c2e;
+  --color-pearl: #3a3a3c;
+  --color-ink: #f5f5f7;
+  --color-ink-muted: #ebebf0;
+  --color-ink-faint: #8e8e93;
+  --color-hairline: #3a3a3c;
+  --color-divider: #2c2c2e;
+  --color-primary: #2997ff;
+  --color-primary-focus: #0a84ff;
+}
+
+/* ============================================================
+   BASE RESETS
+   color-scheme tells the browser to render scrollbars/inputs
+   in the matching theme and prevents stray dark backgrounds.
+   ============================================================ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Always start light — matches our Layout.astro default */
+  color-scheme: light;
+  background-color: var(--color-canvas);
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.47;
+  letter-spacing: -0.374px;
+  color: var(--color-ink);
+  background-color: var(--color-canvas);
+  margin: 0;
+  padding: 0;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ============================================================
+   CUSTOM UTILITIES
+   @utility gives variants (hover:, dark:, lg:, etc.) for free.
+   Docs: functions-and-directives.mdx § @utility
+   ============================================================ */
+
+/* Apple's single product drop-shadow — for coin and imagery only */
+@utility product-shadow {
+  box-shadow: rgba(0, 0, 0, 0.22) 3px 5px 30px 0;
+}
+
+/* Apple tight tracking utilities */
+@utility tracking-tight-apple {
+  letter-spacing: -0.374px;
+}
+
+@utility tracking-tighter-apple {
+  letter-spacing: -0.28px;
+}
+
+/* Full-width content containers */
+@utility container-content {
+  max-width: 980px;
+  margin-inline: auto;
+  padding-inline: 24px;
+}
+
+@utility container-wide {
+  max-width: 1440px;
+  margin-inline: auto;
+  padding-inline: 24px;
+}
+
+/* Section tile vertical rhythm from DESIGN.md: 80px */
+@utility tile-padding {
+  padding-block: 80px;
+}
+
+@utility tile-padding-sm {
+  padding-block: 48px;
+}
+
+/* Section Tile Themes */
+.tile-dark {
+  background-color: var(--color-surface-black);
+  color: var(--color-on-dark);
+}
+
+.tile-light {
+  background-color: var(--color-canvas);
+  color: var(--color-ink);
+}
+
+.tile-parchment {
+  background-color: var(--color-parchment);
+  color: var(--color-ink);
+}
+
+.tile-dark-2 {
+  background-color: var(--color-surface-dark-2);
+  color: var(--color-on-dark);
+}
+
+/* Button Primitives */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: var(--color-primary);
+  color: #ffffff;
+  border-radius: var(--radius-pill);
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.15s ease, transform 0.15s ease;
+  user-select: none;
+  text-decoration: none;
+}
+
+.btn-primary:hover {
+  background-color: var(--color-primary-focus);
+}
+
+.btn-primary:active {
+  transform: scale(0.97);
+}
+
+.btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: transparent;
+  color: var(--color-ink);
+  border: 1px solid var(--color-hairline);
+  border-radius: var(--radius-pill);
+  font-weight: 400;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  user-select: none;
+  text-decoration: none;
+}
+
+.btn-ghost:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.btn-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-pill);
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+/* Backdrop blur frosted glass (sub-nav, sticky bars) */
+@utility frosted {
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+}
+
+/* Coin 3D transform base */
+@utility coin-3d {
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+/* ============================================================
+   KEYFRAMES — used by @theme --animate-* tokens above
+   ============================================================ */
+@keyframes coinSpin {
+  0% {
+    transform: translateY(0px) scale(1) rotateY(0deg);
+  }
+
+  10% {
+    transform: translateY(-40px) scale(1.06) rotateY(360deg);
+  }
+
+  25% {
+    transform: translateY(-110px) scale(1.12) rotateY(900deg);
+  }
+
+  50% {
+    transform: translateY(-160px) scale(1.15) rotateY(1800deg);
+  }
+
+  75% {
+    transform: translateY(-90px) scale(1.1) rotateY(2700deg);
+  }
+
+  90% {
+    transform: translateY(-25px) scale(1.03) rotateY(3240deg);
+  }
+
+  100% {
+    transform: translateY(0px) scale(1) rotateY(3600deg);
+  }
+}
+
+@keyframes coinLandHeads {
+  0% {
+    transform: translateY(0px) scale(1) rotateY(3600deg);
+  }
+
+  50% {
+    transform: translateY(-8px) scale(1.02) rotateY(3598deg);
+  }
+
+  75% {
+    transform: translateY(4px) scale(0.99) rotateY(3601deg);
+  }
+
+  100% {
+    transform: translateY(0px) scale(1) rotateY(3600deg);
+  }
+}
+
+@keyframes coinLandTails {
+  0% {
+    transform: translateY(0px) scale(1) rotateY(3600deg);
+  }
+
+  50% {
+    transform: translateY(-8px) scale(1.02) rotateY(3778deg);
+  }
+
+  75% {
+    transform: translateY(4px) scale(0.99) rotateY(3779deg);
+  }
+
+  100% {
+    transform: translateY(0px) scale(1) rotateY(3780deg);
+  }
+}
+
+@keyframes confettiFall {
+  0% {
+    transform: translateY(-20px) rotate(0deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(100vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+@keyframes barGrow {
+  from {
+    width: 0%;
+  }
+}
+
+/* ============================================================
+   3D COIN COMPONENT
+   Kept in CSS (not utility classes) because backface-visibility
+   and 3D transforms on pseudo-elements need stable class names.
+   ============================================================ */
+.coin-wrapper {
+  perspective: 1000px;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Shadow under the coin — shrinks when coin is "in the air" */
+.coin-shadow {
+  width: 160px;
+  height: 22px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(0, 0, 0, 0.35) 0%, transparent 75%);
+  filter: blur(4px);
+  transition: transform 0.05s ease, opacity 0.05s ease;
+  flex-shrink: 0;
+}
+
+.coin-wrapper.spinning .coin-shadow,
+.coin-wrapper.landing-heads .coin-shadow,
+.coin-wrapper.landing-tails .coin-shadow {
+  /* JS drives the shadow inline during animation */
+  transition: none;
+}
+
+.coin {
+  position: relative;
+  width: 240px;
+  height: 240px;
+  transform-style: preserve-3d;
+  cursor: pointer;
+  border-radius: 50%;
+  will-change: transform;
+}
+
+.coin-face {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: -0.374px;
+  user-select: none;
+}
+
+.coin-face-front {
+  background: radial-gradient(circle at 35% 35%, #ffe680, #d4a017 55%, #a07800 100%);
+  box-shadow:
+    inset 0 0 0 6px rgba(255, 255, 255, 0.3),
+    inset 0 0 0 10px rgba(0, 0, 0, 0.05),
+    0 0 0 3px #b8860b,
+    rgba(0, 0, 0, 0.22) 3px 5px 30px 0;
+  color: #5a3e00;
+}
+
+.coin-face-back {
+  background: radial-gradient(circle at 35% 35%, #ffffff, #b0b0b0 55%, #808080 100%);
+  box-shadow:
+    inset 0 0 0 6px rgba(255, 255, 255, 0.4),
+    inset 0 0 0 10px rgba(0, 0, 0, 0.05),
+    0 0 0 3px #9a9a9a,
+    rgba(0, 0, 0, 0.22) 3px 5px 30px 0;
+  transform: rotateY(180deg);
+  color: #2a2a2a;
+}
+
+.coin-edge-ring {
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  background: conic-gradient(#c9a227 0deg, #f5d060 20deg, #c9a227 40deg,
+      #f5d060 60deg, #c9a227 80deg, #f5d060 100deg,
+      #c9a227 120deg, #f5d060 140deg, #c9a227 160deg,
+      #f5d060 180deg, #c9a227 200deg, #f5d060 220deg,
+      #c9a227 240deg, #f5d060 260deg, #c9a227 280deg,
+      #f5d060 300deg, #c9a227 320deg, #f5d060 340deg,
+      #c9a227 360deg);
+  z-index: -1;
+}
+
+.coin.spinning {
+  animation: coinSpin 0.8s var(--ease-coin) forwards;
+}
+
+.coin.landing-heads {
+  animation: coinLandHeads 0.4s var(--ease-bounce) forwards;
+}
+
+.coin.landing-tails {
+  animation: coinLandTails 0.4s var(--ease-bounce) forwards;
+}
+
+/* ============================================================
+   STAT BAR
+   ============================================================ */
+.stat-bar {
+  height: 6px;
+  border-radius: var(--radius-pill);
+  transition: width 0.6s var(--ease-bounce);
+}
+
+/* ============================================================
+   HISTORY COINS (small result indicators in stats panel)
+   ============================================================ */
+.history-coin {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.history-coin.heads {
+  background: linear-gradient(135deg, #ffe680, #d4a017);
+  color: #5a3e00;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.history-coin.tails {
+  background: linear-gradient(135deg, #ffffff, #b0b0b0);
+  color: #2a2a2a;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* ============================================================
+   CONFETTI
+   ============================================================ */
+.confetti-piece {
+  position: fixed;
+  border-radius: 2px;
+  animation: confettiFall linear forwards;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* ============================================================
+   FAQ ACCORDION — native <details> element
+   ============================================================ */
+details.faq-item {
+  border-bottom: 1px solid var(--color-hairline);
+}
+
+details.faq-item summary {
+  list-style: none;
+  cursor: pointer;
+  padding-block: 20px;
+  font-size: 17px;
+  font-weight: 600;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  user-select: none;
+  color: var(--color-ink);
+}
+
+details.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+details.faq-item summary .faq-icon {
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+  color: var(--color-primary);
+}
+
+details.faq-item[open] summary .faq-icon {
+  transform: rotate(45deg);
+}
+
+details.faq-item .faq-answer {
+  padding-bottom: 20px;
+  color: var(--color-ink-muted);
+  line-height: 1.6;
+}
+
+/* ============================================================
+   MODAL
+   ============================================================ */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.modal-overlay.open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.modal-card {
+  background: var(--color-canvas);
+  border-radius: var(--radius-lg);
+  padding: 40px;
+  max-width: 440px;
+  width: 100%;
+  text-align: center;
+  transform: scale(0.9);
+  transition: transform 0.3s var(--ease-bounce);
+}
+
+.modal-overlay.open .modal-card {
+  transform: scale(1);
+}
+
+/* ============================================================
+   MODE CHIPS — inline game-mode selector
+   Using dark: variant from our @custom-variant dark above
+   ============================================================ */
+.mode-chip {
+  padding: 8px 16px;
+  border-radius: var(--radius-pill);
+  font-size: 14px;
+  font-weight: 400;
+  border: 1px solid var(--color-hairline);
+  background: transparent;
+  color: var(--color-ink-muted);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.mode-chip:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.mode-chip.active {
+  background-color: var(--color-primary);
+  color: white;
+  border-color: var(--color-primary);
+}
+
+[data-theme="dark"] .mode-chip {
+  color: var(--color-body-muted);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+[data-theme="dark"] .mode-chip:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+/* ============================================================
+   GLOBAL NAV
+   ============================================================ */
+.global-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: 44px;
+  background-color: rgba(255, 255, 255, 0.85);
+  border-bottom: 1px solid var(--color-hairline);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  display: flex;
+  align-items: center;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+[data-theme="dark"] .global-nav {
+  background-color: rgba(0, 0, 0, 0.85);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 640px) {
+  .tile-padding {
+    padding-block: 40px;
+  }
+
+  .container-content {
+    padding-inline: 16px;
+  }
+
+  #single-coin {
+    width: 170px;
+    height: 170px;
+  }
+
+  #coin-0-shadow {
+    width: 120px;
+    height: 16px;
+  }
+
+  .text-hero {
+    font-size: 36px !important;
+  }
+
+  .modal-card {
+    padding: 24px;
+    margin: 16px;
+  }
+}
+
+@media (max-width: 834px) {
+  .nav-links {
+    display: none;
+  }
+}

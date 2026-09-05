@@ -1,0 +1,67 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout
+  title="Erro Interno no Servidor (500) — Cara ou Coroa Virtual"
+  description="Ocorreu um erro interno no servidor. Por favor, tente recarregar a página ou voltar para a página inicial do simulador de cara ou coroa."
+  canonicalUrl="https://caraoucoroavirtual.com/500"
+>
+  <Nav />
+
+  <main class="bg-canvas dark:bg-surface-black min-h-[100svh] pt-16 flex flex-col justify-between">
+    <!-- Hero / Error 500 Section -->
+    <section class="tile-dark tile-padding py-20 my-auto">
+      <div class="container-content max-w-[680px] mx-auto text-center space-y-6">
+
+        <!-- 500 Warning Badge -->
+        <div class="inline-flex items-center justify-center w-24 h-24 rounded-full bg-red-500/10 border border-red-500/30 text-red-400 font-extrabold text-4xl shadow-inner mx-auto mb-2">
+          ⚠️ 500
+        </div>
+
+        <p class="text-xs font-semibold tracking-widest text-red-400 uppercase">Erro 500 — Falha no Servidor</p>
+        
+        <h1 class="text-display-lg text-on-dark mb-4 mt-0">
+          Ops! Algo deu errado por aqui.
+        </h1>
+        
+        <p class="text-lead text-body-muted max-w-[540px] mx-auto leading-relaxed">
+          Nossos servidores encontraram um problema inesperado ao processar sua requisição. Nossa equipe já foi notificada.
+        </p>
+
+        <!-- Action Buttons -->
+        <div class="pt-4 flex flex-wrap justify-center gap-4">
+          <button
+            onclick="window.location.reload()"
+            class="bg-primary text-white border-0 cursor-pointer rounded-full font-bold hover:bg-primary-focus transition-all px-8 py-3.5 text-base shadow-md hover:shadow-lg inline-flex items-center gap-2"
+          >
+            <span>🔄</span>
+            <span>Tentar Novamente</span>
+          </button>
+          <a
+            href="/"
+            class="bg-surface-white/10 text-on-dark border border-white/20 no-underline rounded-full font-semibold hover:bg-surface-white/20 transition-all px-6 py-3.5 text-base inline-flex items-center gap-2"
+          >
+            <span>🪙 Início</span>
+          </a>
+        </div>
+
+        <!-- Help Info -->
+        <div class="bg-surface-white/5 border border-white/10 rounded-2xl p-6 mt-8 max-w-[520px] mx-auto text-left">
+          <h3 class="text-sm font-semibold text-on-dark mt-0 mb-2 flex items-center gap-2">
+            <span>💡</span> O que você pode fazer?
+          </h3>
+          <ul class="text-xs text-body-muted space-y-2 m-0 pl-4">
+            <li>Atualize a página pressionando <code class="bg-black/40 px-1.5 py-0.5 rounded text-amber-300">F5</code> ou clicando em Tentar Novamente.</li>
+            <li>Se o problema persistir, entre em contato conosco em <a href="mailto:lifeturningpoint007@gmail.com" class="text-primary-dark hover:underline">lifeturningpoint007@gmail.com</a>.</li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>

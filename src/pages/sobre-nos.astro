@@ -1,0 +1,84 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout
+  title="Sobre Nós — Cara ou Coroa Virtual | Quem Somos"
+  description="Conheça o Cara ou Coroa Virtual — o melhor simulador de cara ou coroa online do Brasil. Gratuito, sem anúncios e sem cadastro. Nossa missão e história."
+  canonicalUrl="https://caraoucoroavirtual.com/sobre-nos"
+>
+  <Nav />
+
+  <main class="bg-canvas dark:bg-surface-black min-h-[100svh] pt-16">
+    <!-- Page Hero -->
+    <section class="tile-dark tile-padding py-16">
+      <div class="container-content max-w-[760px] mx-auto text-center">
+        <p class="text-sm font-semibold tracking-[0.231px] text-primary-dark mb-3 uppercase">Quem Somos</p>
+        <h1 class="text-display-lg text-on-dark mb-4 mt-0">Sobre o Cara ou Coroa Virtual</h1>
+        <p class="text-lead text-body-muted m-0 max-w-[560px] mx-auto">Uma ferramenta simples, justa e gratuita para tomar decisões com um lançamento de moeda.</p>
+      </div>
+    </section>
+
+    <!-- Mission -->
+    <section class="tile-light tile-padding">
+      <div class="container-content max-w-[760px] mx-auto space-y-12">
+
+        <div class="text-center">
+          <h2 class="text-display-sm text-ink mb-4 mt-0">Nossa Missão</h2>
+          <p class="text-[17px] text-ink-muted leading-relaxed max-w-[620px] mx-auto">Criar o simulador de <strong class="text-ink">cara ou coroa online</strong> mais rápido, mais justo e mais acessível do Brasil — sem anúncios, sem cadastro, sem rastreamento. Apenas um lançamento de moeda perfeito, disponível para todos, a qualquer hora.</p>
+        </div>
+
+        <!-- Values grid -->
+        <div class="grid grid-cols-[repeat(auto-fit,minmax(220px,1fr))] gap-6">
+          <div class="bg-parchment rounded-lg p-7 text-center">
+            <div class="text-4xl mb-4">🎯</div>
+            <h3 class="text-[17px] font-semibold text-ink mb-2 mt-0">Simplicidade</h3>
+            <p class="text-sm text-ink-faint m-0 leading-relaxed">Sem menus complicados, sem cadastros, sem distrações. Acesse e jogue em menos de 2 segundos.</p>
+          </div>
+          <div class="bg-parchment rounded-lg p-7 text-center">
+            <div class="text-4xl mb-4">⚖️</div>
+            <h3 class="text-[17px] font-semibold text-ink mb-2 mt-0">Imparcialidade</h3>
+            <p class="text-sm text-ink-faint m-0 leading-relaxed">Cada lançamento é 50/50, matematicamente garantido. Nenhum lado tem vantagem.</p>
+          </div>
+          <div class="bg-parchment rounded-lg p-7 text-center">
+            <div class="text-4xl mb-4">🔒</div>
+            <h3 class="text-[17px] font-semibold text-ink mb-2 mt-0">Privacidade</h3>
+            <p class="text-sm text-ink-faint m-0 leading-relaxed">Zero coleta de dados. Seus lançamentos pertencem a você e a mais ninguém.</p>
+          </div>
+          <div class="bg-parchment rounded-lg p-7 text-center">
+            <div class="text-4xl mb-4">🆓</div>
+            <h3 class="text-[17px] font-semibold text-ink mb-2 mt-0">Gratuidade</h3>
+            <p class="text-sm text-ink-faint m-0 leading-relaxed">100% gratuito, para sempre. Sem planos pagos, sem freemium, sem surpresas.</p>
+          </div>
+        </div>
+
+        <!-- Story -->
+        <div class="border-t border-hairline pt-10">
+          <h2 class="text-display-sm text-ink mb-5 mt-0 text-center">Nossa História</h2>
+          <div class="space-y-5 text-[17px] text-ink-muted leading-relaxed">
+            <p>O <strong class="text-ink">Cara ou Coroa Virtual</strong> nasceu de uma necessidade simples: ter um simulador de cara ou coroa online que fosse realmente bom. A maioria das ferramentas disponíveis era cheia de anúncios, carregava lentamente, não tinha animações realistas ou exigia cadastro para usar.</p>
+            <p>Queríamos algo diferente — uma experiência limpa, bonita e instantânea. Uma moeda virtual que parecesse uma moeda de verdade, com som, com física 3D, com estatísticas ao vivo. Uma ferramenta que qualquer brasileiro pudesse abrir no celular durante uma partida de futebol, em sala de aula ou na hora de decidir quem lava a louça.</p>
+            <p>O resultado é o que você vê aqui: o <strong class="text-ink">cara ou coroa online</strong> mais completo e justo disponível em português. Com modo multi-moeda, torneios Melhor de 3/5/7, rótulos personalizados, modo escuro e muito mais — tudo gratuito, sem anúncios, sem cadastro.</p>
+          </div>
+        </div>
+
+        <!-- Tech -->
+        <div class="border-t border-hairline pt-10">
+          <h2 class="text-display-sm text-ink mb-5 mt-0 text-center">Tecnologia</h2>
+          <p class="text-[17px] text-ink-muted leading-relaxed text-center max-w-[600px] mx-auto">O Cara ou Coroa Virtual é construído com <strong class="text-ink">Astro</strong> (framework de sites estáticos de alta performance), <strong class="text-ink">Tailwind CSS</strong> e JavaScript nativo. O site é gerado estaticamente — carrega instantaneamente, funciona offline e não depende de servidores para os resultados. A aleatoriedade é garantida pelo gerador <code class="bg-black/5 px-1.5 py-0.5 rounded font-mono text-sm">Math.random()</code> do próprio navegador.</p>
+        </div>
+
+        <!-- CTA -->
+        <div class="border-t border-hairline pt-10 text-center">
+          <p class="text-[17px] text-ink-muted mb-5">Pronto para jogar?</p>
+          <a href="/" class="bg-primary text-white no-underline rounded-full font-semibold hover:bg-primary-focus transition-colors px-8 py-3.5 text-base inline-block">Jogar Cara ou Coroa Agora →</a>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
