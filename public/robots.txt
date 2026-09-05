@@ -3,4 +3,4 @@ Allow: /
 Disallow: /404
 Disallow: /500
 
-Sitemap: https://caraoucoroavirtual.com/sitemap.xml
+Sitemap: https://caraoucoroavirtual.com/sitemap-index.xml
