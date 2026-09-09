@@ -187,7 +187,7 @@
           <!-- Histórico de lançamentos -->
           <div class="border-t border-hairline dark:border-white/10 pt-4">
             <p class="text-xs text-ink-faint dark:text-white/50 mb-2.5 uppercase tracking-[0.5px]">Lançamentos recentes</p>
-            <div id="history-stream" class="flex flex-wrap gap-1 min-h-[28px]" aria-live="polite" aria-label="Histórico de lançamentos"></div>
+            <div id="history-stream" class="flex flex-wrap gap-1 min-h-[28px]" role="region" aria-live="polite" aria-label="Histórico de lançamentos"></div>
             <p id="history-empty" class="text-xs text-ink-faint dark:text-white/30 m-0 italic">Nenhum lançamento ainda — jogue a moeda!</p>
           </div>
         </div>
@@ -473,7 +473,7 @@ function renderCoins(count: number) {
     const { size, fontSize, subSize, shadowW } = getCoinSizeConfig(1);
     container.innerHTML = `
       <div class="coin-wrapper" id="coin-0">
-        <div class="coin" id="single-coin" role="button" tabindex="0" aria-label="Coin — click to flip" style="width:${size};height:${size};">
+        <div class="coin" id="single-coin" role="button" tabindex="0" aria-label="Moeda — clique para lançar" style="width:${size};height:${size};">
           <div class="coin-edge-ring"></div>
           <div class="coin-face coin-face-front">
             <div class="text-center leading-tight">
