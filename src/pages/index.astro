@@ -3,11 +3,115 @@ import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import CoinApp from '../components/CoinApp.astro';
 import Footer from '../components/Footer.astro';
+
+const webAppSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Cara ou Coroa Virtual",
+  "alternateName": ["Cara ou Coroa Online", "Cara ou Corôa Jogo", "Moeda Virtual"],
+  "url": "https://caraoucoroavirtual.com/",
+  "description": "Jogue cara ou coroa online grátis. Moeda virtual com animação 3D real, estatísticas ao vivo, modo multi-moeda e modos de jogo. Sem cadastro. Sem anúncios.",
+  "applicationCategory": "GameApplication",
+  "operatingSystem": "Any",
+  "inLanguage": "pt-BR",
+  "isAccessibleForFree": true,
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "BRL"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Cara ou Coroa Virtual",
+    "url": "https://caraoucoroavirtual.com/"
+  }
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Cara ou coroa?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Cara ou coroa é um jogo de sorte baseado no lançamento de uma moeda. Cada face da moeda representa um resultado: cara (a face com o rosto ou símbolo principal) e coroa (a face reversa). O resultado é completamente aleatório, com 50% de probabilidade para cada lado. É usado há séculos para tomar decisões rápidas e imparciais."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Qual é cara ou coroa?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Cara é a face principal da moeda — normalmente a que exibe um rosto, símbolo ou efígie. Coroa é o verso da moeda — o lado oposto ao da cara. Em inglês, equivalem a heads (cara) e tails (coroa). No nosso simulador virtual, a moeda dourada exibe C para cara e a face prateada exibe K para coroa."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Quantas vezes posso lançar a moeda virtual?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Você pode lançar a moeda virtual quantas vezes quiser, sem qualquer limite. Não há restrições de uso, sem cotas diárias, sem planos pagos. O simulador de cara ou coroa é completamente gratuito e ilimitado — basta clicar no botão 'Jogar a moeda!' ou pressionar a tecla Espaço."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Esta aplicação é gratuita?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sim, 100% gratuita para sempre. O Cara ou Coroa Virtual não tem planos pagos, anúncios, assinaturas ou qualquer custo oculto. Todos os recursos — modo multi-moeda, estatísticas ao vivo, modo Melhor de 3/5/7, rótulos personalizados e modo escuro — estão disponíveis para todos sem nenhuma limitação."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Preciso ter uma conta para lançar a moeda online?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Não. O Cara ou Coroa Virtual não exige cadastro, login ou conta de qualquer tipo. Basta acessar o site e começar a jogar imediatamente. Nenhum dado pessoal é solicitado ou armazenado. Todos os resultados ficam apenas na memória do seu navegador durante a sessão e desaparecem quando você fecha a aba."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Quantas faces tem a moeda virtual?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A moeda virtual tem duas faces: Cara (face dourada, lado principal) e Coroa (face prateada, lado reverso). Você também pode personalizar os nomes de cada face — substitua 'Cara' e 'Coroa' por qualquer texto de até 12 caracteres, como 'Sim/Não', 'Pizza/Sushi' ou 'Casa/Fora'."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "O que é mais provável sair, cara ou coroa?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No nosso simulador, nenhum lado é mais provável que o outro. Cada lançamento tem exatamente 50% de probabilidade para cara e 50% para coroa, usando o gerador Math.random() do navegador — estatisticamente independente e sem viés. Curiosidade: moedas físicas têm leve tendência ao lado que estava para cima (~51%), mas nossa moeda virtual é perfeitamente justa."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Qual é a diferença em relação à Cara ou Coroa do Google?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "O Cara ou Coroa do Google é uma funcionalidade básica integrada à busca — simples e funcional, mas sem recursos extras. O Cara ou Coroa Virtual vai muito além: oferece animação 3D realista com som, estatísticas ao vivo (contagens, percentuais, sequências), modo multi-moeda (até 5 moedas simultâneas), modo torneio Melhor de 3/5/7, rótulos personalizados, modo escuro e atalhos de teclado — tudo gratuito, sem anúncios e sem cadastro."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Quais são os usos para o simulador de cara ou coroa?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "O simulador de cara ou coroa tem inúmeros usos: decisões do dia a dia (o que comer, assistir ou fazer); esportes e torneios (sorteio de campo, escolha de lado); jogos de mesa (quem começa, resolução de empates); votações em grupo (use o modo multi-moeda para maioria); educação (ensinar probabilidade e estatística em sala de aula); sorteios (escolha aleatória imparcial); e qualquer situação que precise de um árbitro justo e instantâneo."
+      }
+    }
+  ]
+};
 ---
 
 <Layout
-  title="Cara ou Coroa Online — Jogar Grátis | Cara ou Corôa Virtual | Moeda Virtual"
-  description="Cara ou coroa online grátis. Jogue cara ou corôa virtual com animação 3D real, estatísticas ao vivo, modo multi-moeda e modos de torneio. Sem cadastro. Sem anúncios. Disponível no Google."
+  title="Cara ou Coroa Online — Simulador de Moeda Virtual Grátis"
+  description="Jogue cara ou coroa online com moeda 3D realista, estatísticas ao vivo e modo multi-moedas. Grátis, sem anúncios e sem cadastro. Tire a sua sorte agora!"
+  canonicalUrl="https://caraoucoroavirtual.com/"
+  schemas={[webAppSchema, faqSchema]}
 >
   <!-- ── NAVEGAÇÃO ─────────────────────────────────────── -->
   <Nav />
