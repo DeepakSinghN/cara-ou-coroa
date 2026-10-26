@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
 import Footer from '../components/Footer.astro';
 ---
 
@@ -16,6 +17,7 @@ import Footer from '../components/Footer.astro';
     <!-- Hero / Error 404 Section -->
     <section class="tile-dark tile-padding py-20 my-auto">
       <div class="container-content max-w-[680px] mx-auto text-center space-y-6">
+        <Breadcrumbs currentPage="Erro 404" />
 
         <!-- 404 Coin Badge -->
         <div class="inline-flex items-center justify-center w-24 h-24 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 font-extrabold text-4xl shadow-inner mx-auto mb-2">
