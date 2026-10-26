@@ -333,6 +333,402 @@ body {
   }
 }
 
+/* ============================================================
+   THE CARTOON JELLY SLIME (Squash, Stretch & Boing-Boing)
+   ============================================================ */
+@keyframes coinJellySpin {
+  0% {
+    transform: translateY(0px) scale(1, 1) rotateY(0deg);
+  }
+  /* Phase 1: Cartoon Anticipation Squash (slime coils down with weight) */
+  8% {
+    transform: translateY(14px) scale(1.34, 0.7) rotateY(180deg);
+  }
+  /* Phase 2: Rocket Stretch Launch */
+  20% {
+    transform: translateY(-110px) scale(0.74, 1.36) rotateY(720deg) rotateZ(-4deg);
+  }
+  /* Phase 3: High speed ascent */
+  35% {
+    transform: translateY(-220px) scale(0.8, 1.25) rotateY(1440deg) rotateZ(2deg);
+  }
+  /* Phase 4: Floaty High Apex & Gelatinous Jiggle (-290px high!) */
+  48% {
+    transform: translateY(-285px) scale(1.08, 0.93) rotateY(2160deg) rotateZ(-3deg);
+  }
+  54% {
+    transform: translateY(-290px) scale(1.14, 0.88) rotateY(2520deg) rotateZ(0deg);
+  }
+  60% {
+    transform: translateY(-282px) scale(0.96, 1.05) rotateY(2880deg) rotateZ(3deg);
+  }
+  /* Phase 5: Fast Drop with Stretch downward */
+  73% {
+    transform: translateY(-195px) scale(0.76, 1.32) rotateY(3240deg) rotateZ(-1deg);
+  }
+  86% {
+    transform: translateY(-80px) scale(0.82, 1.22) rotateY(3480deg);
+  }
+  94% {
+    transform: translateY(-16px) scale(0.92, 1.09) rotateY(3580deg);
+  }
+  /* 100%: Smooth touchdown, prepared for landing bounce */
+  100% {
+    transform: translateY(0px) scale(1.04, 0.96) rotateY(3600deg);
+  }
+}
+
+@keyframes coinJellyLandHeads {
+  0% {
+    transform: translateY(0px) scale(1.04, 0.96) rotateY(3600deg);
+  }
+  /* 1. Impact Splat! Extreme smooth squash */
+  14% {
+    transform: translateY(18px) scale(1.48, 0.58) rotateY(3600deg);
+  }
+  /* 2. BOING #1! Launches back up stretched high */
+  34% {
+    transform: translateY(-40px) scale(0.78, 1.28) rotateY(3600deg);
+  }
+  /* 3. Splat #2 (cushioned rebound) */
+  52% {
+    transform: translateY(10px) scale(1.22, 0.84) rotateY(3600deg);
+  }
+  /* 4. Boing #2 (mini rebound) */
+  68% {
+    transform: translateY(-14px) scale(0.91, 1.1) rotateY(3600deg);
+  }
+  /* 5. Jiggle settle */
+  82% {
+    transform: translateY(4px) scale(1.07, 0.95) rotateY(3600deg);
+  }
+  92% {
+    transform: translateY(-2px) scale(0.98, 1.02) rotateY(3600deg);
+  }
+  100% {
+    transform: translateY(0px) scale(1, 1) rotateY(3600deg);
+  }
+}
+
+@keyframes coinJellyLandTails {
+  0% {
+    transform: translateY(0px) scale(1.04, 0.96) rotateY(3780deg);
+  }
+  /* 1. Impact Splat! Extreme smooth squash */
+  14% {
+    transform: translateY(18px) scale(1.48, 0.58) rotateY(3780deg);
+  }
+  /* 2. BOING #1! Launches back up stretched high */
+  34% {
+    transform: translateY(-40px) scale(0.78, 1.28) rotateY(3780deg);
+  }
+  /* 3. Splat #2 (cushioned rebound) */
+  52% {
+    transform: translateY(10px) scale(1.22, 0.84) rotateY(3780deg);
+  }
+  /* 4. Boing #2 (mini rebound) */
+  68% {
+    transform: translateY(-14px) scale(0.91, 1.1) rotateY(3780deg);
+  }
+  /* 5. Jiggle settle */
+  82% {
+    transform: translateY(4px) scale(1.07, 0.95) rotateY(3780deg);
+  }
+  92% {
+    transform: translateY(-2px) scale(0.98, 1.02) rotateY(3780deg);
+  }
+  100% {
+    transform: translateY(0px) scale(1, 1) rotateY(3780deg);
+  }
+}
+
+@keyframes shadowJellyLand {
+  0% { transform: scale(1); opacity: 1; }
+  14% { transform: scale(1.5, 1.18); opacity: 1; }
+  34% { transform: scale(0.62, 0.62); opacity: 0.42; }
+  52% { transform: scale(1.24, 1.08); opacity: 0.9; }
+  68% { transform: scale(0.85, 0.85); opacity: 0.72; }
+  82% { transform: scale(1.06, 1.02); opacity: 0.95; }
+  92% { transform: scale(0.98, 0.98); opacity: 0.98; }
+  100% { transform: scale(1, 1); opacity: 1; }
+}
+
+/* ============================================================
+   SUPER MARIO RETRO COIN PUNCH ANIMATIONS
+   ============================================================ */
+@keyframes coinMarioSpin {
+  0% {
+    transform: translateY(0px) scale(1) rotateY(0deg);
+  }
+  /* Sudden punch blast impulse from below */
+  10% {
+    transform: translateY(-85px) scale(1.08, 0.94) rotateY(540deg);
+  }
+  28% {
+    transform: translateY(-210px) scale(1.04, 0.98) rotateY(1260deg);
+  }
+  /* Apex float with slight scale boost */
+  48% {
+    transform: translateY(-275px) scale(1.12, 1.05) rotateY(1980deg);
+  }
+  58% {
+    transform: translateY(-265px) scale(1.08, 1.02) rotateY(2520deg);
+  }
+  76% {
+    transform: translateY(-160px) scale(1.04, 1) rotateY(3060deg);
+  }
+  90% {
+    transform: translateY(-40px) scale(1.02, 1) rotateY(3420deg);
+  }
+  100% {
+    transform: translateY(0px) scale(1) rotateY(3600deg);
+  }
+}
+
+@keyframes coinMarioLandHeads {
+  0% {
+    transform: translateY(0px) scale(1) rotateY(3600deg);
+  }
+  25% {
+    transform: translateY(-22px) scale(1.06, 0.96) rotateY(3600deg);
+  }
+  50% {
+    transform: translateY(4px) scale(0.98, 1.02) rotateY(3600deg);
+  }
+  75% {
+    transform: translateY(-6px) scale(1.02, 0.99) rotateY(3600deg);
+  }
+  100% {
+    transform: translateY(0px) scale(1) rotateY(3600deg);
+  }
+}
+
+@keyframes coinMarioLandTails {
+  0% {
+    transform: translateY(0px) scale(1) rotateY(3780deg);
+  }
+  25% {
+    transform: translateY(-22px) scale(1.06, 0.96) rotateY(3780deg);
+  }
+  50% {
+    transform: translateY(4px) scale(0.98, 1.02) rotateY(3780deg);
+  }
+  75% {
+    transform: translateY(-6px) scale(1.02, 0.99) rotateY(3780deg);
+  }
+  100% {
+    transform: translateY(0px) scale(1) rotateY(3780deg);
+  }
+}
+
+/* Mario Golden Pixel Sparkles */
+.mario-sparkle {
+  position: absolute;
+  pointer-events: none;
+  font-size: 22px;
+  line-height: 1;
+  user-select: none;
+  z-index: 40;
+  animation: marioSparkleFloat 0.75s ease-out forwards;
+}
+
+@keyframes marioSparkleFloat {
+  0% {
+    transform: translate(-50%, -50%) scale(0.3) rotate(0deg);
+    opacity: 1;
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(calc(-50% + var(--dx, 0px)), calc(-50% + var(--dy, -60px))) scale(1.25) rotate(180deg);
+    opacity: 0;
+  }
+}
+
+/* ============================================================
+   ARCADE JACKPOT / 5000 RPM HYPER-SPIN ANIMATIONS
+   ============================================================ */
+@keyframes coinJackpotSpin {
+  0% {
+    transform: translateY(0px) rotateY(0deg) scale(1);
+  }
+  /* Fast Rev-up */
+  10% {
+    transform: translateY(-60px) rotateY(720deg) scale(1.05);
+  }
+  /* Entering Hyper-Speed Warp (5000 RPM) */
+  28% {
+    transform: translateY(-180px) rotateY(2880deg) scale(1.12);
+  }
+  /* High Apex with blistering speed */
+  50% {
+    transform: translateY(-270px) rotateY(5400deg) scale(1.15);
+  }
+  /* Deceleration / Suspense Braking */
+  72% {
+    transform: translateY(-200px) rotateY(6660deg) scale(1.08);
+  }
+  86% {
+    transform: translateY(-80px) rotateY(7080deg) scale(1.04);
+  }
+  95% {
+    transform: translateY(-12px) rotateY(7180deg) scale(1.02);
+  }
+  100% {
+    transform: translateY(0px) rotateY(7200deg) scale(1);
+  }
+}
+
+@keyframes coinJackpotLandHeads {
+  0% {
+    transform: translateY(0px) rotateY(7200deg) scale(1);
+  }
+  /* Heavy mechanical latch snap */
+  20% {
+    transform: translateY(6px) rotateY(7200deg) scale(1.1, 0.94);
+  }
+  45% {
+    transform: translateY(-10px) rotateY(7200deg) scale(0.98, 1.02);
+  }
+  70% {
+    transform: translateY(2px) rotateY(7200deg) scale(1.02, 0.99);
+  }
+  100% {
+    transform: translateY(0px) rotateY(7200deg) scale(1);
+  }
+}
+
+@keyframes coinJackpotLandTails {
+  0% {
+    transform: translateY(0px) rotateY(7380deg) scale(1);
+  }
+  /* Heavy mechanical latch snap */
+  20% {
+    transform: translateY(6px) rotateY(7380deg) scale(1.1, 0.94);
+  }
+  45% {
+    transform: translateY(-10px) rotateY(7380deg) scale(0.98, 1.02);
+  }
+  70% {
+    transform: translateY(2px) rotateY(7380deg) scale(1.02, 0.99);
+  }
+  100% {
+    transform: translateY(0px) rotateY(7380deg) scale(1);
+  }
+}
+
+@keyframes jackpotNeonPulse {
+  0% {
+    box-shadow: 0 0 25px 8px rgba(0, 240, 255, 0.85), 0 0 50px 15px rgba(255, 215, 0, 0.6);
+  }
+  100% {
+    box-shadow: 0 0 45px 14px rgba(255, 0, 180, 0.9), 0 0 75px 25px rgba(0, 255, 200, 0.8);
+  }
+}
+
+/* Casino Jackpot Neon Shockwave Ring */
+.jackpot-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 160px;
+  height: 160px;
+  margin-top: -80px;
+  margin-left: -80px;
+  border-radius: 50%;
+  border: 3px solid #00ffff;
+  pointer-events: none;
+  z-index: 25;
+  animation: jackpotRingExpand 0.6s cubic-bezier(0.1, 0.9, 0.2, 1) forwards;
+}
+
+@keyframes jackpotRingExpand {
+  0% {
+    transform: scale(0.6);
+    opacity: 1;
+    border-color: #00ffff;
+    box-shadow: 0 0 25px #00ffff, inset 0 0 15px #00ffff;
+  }
+  100% {
+    transform: scale(2.2);
+    opacity: 0;
+    border-color: #ffd700;
+    box-shadow: 0 0 50px #ffd700, inset 0 0 30px #ffd700;
+  }
+}
+
+/* ============================================================
+   3D SCREEN POP-OUT WITH SLOW-MOTION SUSPENSION ANIMATIONS
+   ============================================================ */
+@keyframes coinScreenPopSpin {
+  0% {
+    transform: translateZ(0px) scale(1) rotateY(0deg) translateY(0px);
+  }
+  /* Phase 1: Fast acceleration straight towards camera / screen */
+  10% {
+    transform: translateZ(190px) scale(1.36) rotateY(720deg) translateY(-8px);
+  }
+  22% {
+    transform: translateZ(420px) scale(1.82) rotateY(1800deg) translateY(-22px);
+  }
+  /* Phase 2: SLOW-MOTION BULLET-TIME SUSPENSION (Right in front of user) */
+  32% {
+    transform: translateZ(465px) scale(1.9) rotateY(1980deg) translateY(-26px);
+  }
+  45% {
+    /* Apex: floating huge, rotating in slow motion */
+    transform: translateZ(490px) scale(1.96) rotateY(2160deg) translateY(-28px);
+  }
+  58% {
+    transform: translateZ(475px) scale(1.92) rotateY(2340deg) translateY(-26px);
+  }
+  68% {
+    /* Slow-motion exit */
+    transform: translateZ(430px) scale(1.84) rotateY(2520deg) translateY(-22px);
+  }
+  /* Phase 3: Fast dive back down onto the surface */
+  80% {
+    transform: translateZ(280px) scale(1.48) rotateY(3060deg) translateY(-14px);
+  }
+  92% {
+    transform: translateZ(90px) scale(1.16) rotateY(3460deg) translateY(-4px);
+  }
+  100% {
+    transform: translateZ(0px) scale(1) rotateY(3600deg) translateY(0px);
+  }
+}
+
+@keyframes coinScreenPopLandHeads {
+  0% {
+    transform: translateZ(0px) scale(1) rotateY(3600deg) translateY(0px);
+  }
+  25% {
+    transform: translateZ(0px) scale(1.08, 0.94) rotateY(3600deg) translateY(3px);
+  }
+  60% {
+    transform: translateZ(25px) scale(1.03) rotateY(3600deg) translateY(-4px);
+  }
+  100% {
+    transform: translateZ(0px) scale(1) rotateY(3600deg) translateY(0px);
+  }
+}
+
+@keyframes coinScreenPopLandTails {
+  0% {
+    transform: translateZ(0px) scale(1) rotateY(3780deg) translateY(0px);
+  }
+  25% {
+    transform: translateZ(0px) scale(1.08, 0.94) rotateY(3780deg) translateY(3px);
+  }
+  60% {
+    transform: translateZ(25px) scale(1.03) rotateY(3780deg) translateY(-4px);
+  }
+  100% {
+    transform: translateZ(0px) scale(1) rotateY(3780deg) translateY(0px);
+  }
+}
+
 @keyframes confettiFall {
   0% {
     transform: translateY(-20px) rotate(0deg);
@@ -455,17 +851,144 @@ body {
   animation: coinLandTails 0.4s var(--ease-bounce) forwards;
 }
 
-/* ============================================================
-   STAT BAR
-   ============================================================ */
-.stat-bar {
-  height: 6px;
-  border-radius: var(--radius-pill);
-  transition: width 0.6s var(--ease-bounce);
+/* --- Jelly Slime Animation Style (Cartoon Squash & Boing) --- */
+.style-jelly .coin.spinning {
+  animation: coinJellySpin 1.2s cubic-bezier(0.28, 0.74, 0.45, 1) forwards;
+}
+
+.style-jelly .coin.landing-heads {
+  animation: coinJellyLandHeads 0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.style-jelly .coin.landing-tails {
+  animation: coinJellyLandTails 0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.style-jelly .coin-wrapper.landing-heads .coin-shadow,
+.style-jelly .coin-wrapper.landing-tails .coin-shadow {
+  animation: shadowJellyLand 0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* --- Super Mario Animation Style (Retro 8-Bit Punch) --- */
+.style-mario .coin.spinning {
+  animation: coinMarioSpin 0.9s cubic-bezier(0.18, 0.88, 0.32, 1) forwards;
+}
+
+.style-mario .coin.spinning .coin-edge-ring {
+  box-shadow: 0 0 26px 8px rgba(255, 215, 0, 0.85), 0 0 50px 14px rgba(255, 165, 0, 0.5);
+  transition: box-shadow 0.2s ease;
+}
+
+.style-mario .coin.landing-heads {
+  animation: coinMarioLandHeads 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.style-mario .coin.landing-tails {
+  animation: coinMarioLandTails 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* --- Arcade Jackpot Animation Style (5000 RPM Hyper-Spin) --- */
+.style-jackpot .coin.spinning {
+  animation: coinJackpotSpin 1.1s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+}
+
+.style-jackpot .coin.spinning .coin-edge-ring {
+  animation: jackpotNeonPulse 0.12s infinite alternate;
+}
+
+.style-jackpot .coin.landing-heads {
+  animation: coinJackpotLandHeads 0.4s cubic-bezier(0.2, 0.9, 0.3, 1.2) forwards;
+}
+
+.style-jackpot .coin.landing-tails {
+  animation: coinJackpotLandTails 0.4s cubic-bezier(0.2, 0.9, 0.3, 1.2) forwards;
+}
+
+/* --- 3D Screen Pop-Out Animation Style (Toward Screen) --- */
+.style-popout .coin.spinning {
+  z-index: 60;
+  animation: coinScreenPopSpin 1.4s cubic-bezier(0.25, 0.85, 0.35, 1) forwards;
+}
+
+.style-popout .coin.landing-heads {
+  z-index: 50;
+  animation: coinScreenPopLandHeads 0.4s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+.style-popout .coin.landing-tails {
+  z-index: 50;
+  animation: coinScreenPopLandTails 0.4s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .style-popout .coin.spinning,
+  .style-popout .coin.landing-heads,
+  .style-popout .coin.landing-tails,
+  .style-jackpot .coin.spinning,
+  .style-jackpot .coin.landing-heads,
+  .style-jackpot .coin.landing-tails,
+  .style-mario .coin.spinning,
+  .style-mario .coin.landing-heads,
+  .style-mario .coin.landing-tails,
+  .style-jelly .coin.spinning,
+  .style-jelly .coin.landing-heads,
+  .style-jelly .coin.landing-tails,
+  .coin.spinning,
+  .coin.landing-heads,
+  .coin.landing-tails {
+    animation: none !important;
+  }
 }
 
 /* ============================================================
-   HISTORY COINS (small result indicators in stats panel)
+   WINNER SHOWCASE CARD
+   ============================================================ */
+.winner-showcase-ready {
+  background: rgba(0, 0, 0, 0.02);
+  border-color: var(--color-hairline);
+}
+:root[data-theme="dark"] .winner-showcase-ready {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.winner-showcase-heads {
+  background: linear-gradient(145deg, #fff9e6 0%, #faedd0 100%);
+  border-color: rgba(212, 160, 23, 0.45);
+  box-shadow: 0 8px 24px -6px rgba(212, 160, 23, 0.35);
+  animation: winnerCardPop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+:root[data-theme="dark"] .winner-showcase-heads {
+  background: linear-gradient(145deg, #2b2207 0%, #1c1503 100%);
+  border-color: rgba(255, 215, 0, 0.35);
+  box-shadow: 0 8px 24px -6px rgba(212, 160, 23, 0.25);
+}
+
+.winner-showcase-tails {
+  background: linear-gradient(145deg, #f4f6fa 0%, #e3e8f0 100%);
+  border-color: rgba(154, 160, 166, 0.45);
+  box-shadow: 0 8px 24px -6px rgba(130, 140, 155, 0.3);
+  animation: winnerCardPop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+:root[data-theme="dark"] .winner-showcase-tails {
+  background: linear-gradient(145deg, #20242c 0%, #14171d 100%);
+  border-color: rgba(197, 203, 214, 0.3);
+  box-shadow: 0 8px 24px -6px rgba(130, 140, 155, 0.2);
+}
+
+@keyframes winnerCardPop {
+  0% {
+    transform: scale(0.96);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* ============================================================
+   HISTORY COINS (Mini 3D Minted Tokens)
    ============================================================ */
 .history-coin {
   width: 28px;
@@ -475,20 +998,43 @@ body {
   align-items: center;
   justify-content: center;
   font-size: 11px;
-  font-weight: 600;
+  font-weight: 800;
   flex-shrink: 0;
+  position: relative;
+  animation: miniCoinPop 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes miniCoinPop {
+  0% {
+    transform: scale(0.4);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 .history-coin.heads {
-  background: linear-gradient(135deg, #ffe680, #d4a017);
-  color: #5a3e00;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  background:
+    radial-gradient(circle at 35% 35%, #fff5ba, #d4a017 60%, #996e00 100%);
+  color: #4a3402;
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.8),
+    inset 0 -1px 1px rgba(0, 0, 0, 0.35),
+    0 2px 4px rgba(0, 0, 0, 0.2);
+  border: 1px solid #c99818;
 }
 
 .history-coin.tails {
-  background: linear-gradient(135deg, #ffffff, #b0b0b0);
-  color: #2a2a2a;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  background:
+    radial-gradient(circle at 35% 35%, #ffffff, #b5bcc7 60%, #6e7582 100%);
+  color: #22262d;
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.9),
+    inset 0 -1px 1px rgba(0, 0, 0, 0.35),
+    0 2px 4px rgba(0, 0, 0, 0.2);
+  border: 1px solid #8e95a0;
 }
 
 /* ============================================================

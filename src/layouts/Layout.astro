@@ -12,8 +12,8 @@ interface Props {
 }
 
 const {
-  title = "Cara ou Coroa Online — Simulador de Moeda Virtual Grátis",
-  description = "Jogue cara ou coroa online com moeda 3D realista, estatísticas ao vivo e modo multi-moedas. Grátis, sem anúncios e sem cadastro. Tire a sua sorte agora!",
+  title = "Cara ou Coroa — Jogo da Moeda Virtual Online Grátis",
+  description = "Jogue cara ou coroa online com moeda 3D realista, som autêntico e estatísticas ao vivo. Escolha torneio Melhor de 3/5/7, sem anúncios e 100% grátis. Jogue agora!",
   canonicalUrl = "https://caraoucoroavirtual.com/",
   noindex = false,
   ogImage = "https://caraoucoroavirtual.com/og-image.jpg",
@@ -38,7 +38,46 @@ const defaultWebsiteSchema = {
   }
 };
 
-const allSchemas = [defaultWebsiteSchema, ...schemas];
+// Generate BreadcrumbList Schema for subpages
+const pathname = Astro.url.pathname;
+const isHome = pathname === '/' || pathname === '';
+let breadcrumbSchema: Record<string, any> | null = null;
+
+if (!isHome && !noindex) {
+  const cleanPath = pathname.replace(/^\/|\/$/g, '');
+  const pageNames: Record<string, string> = {
+    'sobre-nos': 'Sobre Nós',
+    'contato': 'Fale Conosco',
+    'politica-de-privacidade': 'Política de Privacidade',
+    'termos-e-condicoes': 'Termos e Condições',
+  };
+  const pageTitle = pageNames[cleanPath] || title.split('—')[0].trim();
+
+  breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Início",
+        "item": "https://caraoucoroavirtual.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": pageTitle,
+        "item": canonicalUrl
+      }
+    ]
+  };
+}
+
+const allSchemas = [
+  defaultWebsiteSchema,
+  ...(breadcrumbSchema ? [breadcrumbSchema] : []),
+  ...schemas
+];
 ---
 <!doctype html>
 <html lang="pt-BR" data-theme="light">
